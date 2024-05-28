@@ -9,5 +9,5 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'TSN-2.0';
+  title = 'The-Social-Network-2.0';
 }
