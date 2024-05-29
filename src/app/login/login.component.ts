@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
     ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
@@ -22,8 +23,13 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
       
     this.loginForm = this.formBuilder.group({
-      mail: [null, Validators.required],
-      mdp: [null, Validators.required]
+      email: [null, Validators.required],
+      password: [null, Validators.required]
     });
+  }
+
+  onNaviguateToSignupPage(): void{
+
+    this.router.navigateByUrl('/singup');
   }
 }

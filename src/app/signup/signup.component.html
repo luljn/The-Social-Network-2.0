@@ -1,0 +1,50 @@
+<div class="container-fluid my-5">
+    <div class="row justify-content-center my-5">
+      <div class="col-8 col-sm-8 col-md-6 col-lg-4">
+        <div>
+          <h5 class="text-center text-primary fw-bold my-5">THE SOCIAL NETWORK</h5>
+        </div>
+        <form [formGroup]="signupForm" class="border p-4 shadow rounded text-bg-light row gy-2 pb-4 border border-3 rounded-3 my-5 my-sm-5">
+          <p class="text-center">
+            <span class="text-dark fs-3 fw-bold">Créer un compte</span><br>
+            <span class="text-secondary fs-5">C'est rapide et facile.</span>
+          </p>
+          <hr>
+          <div class="col-6">
+            <label for="name" class="form-label"></label>
+            <input type="text" class="form-control" name="name" id="name" placeholder="Nom" formControlName="name">
+            </div>
+            <div class="col-6">
+                <label for="surname" class="form-label"></label>
+                <input type="text" class="form-control" name="surname" id="surname" placeholder="Prénom" formControlName="surname">
+            </div>
+            <div class="col-12">
+                <label for="email" class="form-label"></label>
+                <input type="text" class="form-control" name="email" id="email" placeholder="Adresse mail" formControlName="email">
+            </div>
+            <div class="col-12">
+                <label for="address" class="form-label"></label>
+                <input type="text" class="form-control" name="address" id="address" placeholder="Adresse" formControlName="address">
+            </div>
+            <div class="col-12">
+                <label for="password" class="form-label"></label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="Nouveau mot de passe" formControlName="password">
+            </div>
+            <div class="col-12 mt-4 mb-3">
+                <label for="birthdate" class="form-label text-secondary">Date de naissance</label>
+                <input type="date" class="form-control" name="birthdate" id="birthdate" formControlName="birthdate">
+            </div>
+            <div class="col-12 my-3">
+                <button type="submit" class="btn btn-success w-100 fs-5 fw-bold" [disabled]="signupForm.invalid">S'inscrire</button>
+            </div>
+            <hr>
+            <p class="text-center fs-6">
+                Vous avez déjà un compte ?
+                <a routerLink="" class="text-primary text-center">
+                    Connectez-vous Ici
+                </a>
+            </p>
+        </form>
+      </div>
+    </div>
+</div>
