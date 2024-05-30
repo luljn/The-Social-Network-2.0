@@ -15,15 +15,16 @@ import { Router, RouterLink } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
-  emailRegex!: RegExp; 
+  emailRegex!: RegExp;   // To verify the format of the user email address.
 
   constructor(private formBuilder: FormBuilder,
               private router: Router){}
 
   ngOnInit(): void {
       
+    this.emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     this.loginForm = this.formBuilder.group({
-      email: [null, Validators.required],
+      email: [null, [Validators.required, Validators.pattern(this.emailRegex)]],
       password: [null, Validators.required]
     });
   }
