@@ -33,4 +33,9 @@ export class LoginComponent implements OnInit {
 
     this.router.navigateByUrl('/singup');
   }
+
+  onConnectUser(): void{
+
+    this.router.navigateByUrl('/home');
+  }
 }

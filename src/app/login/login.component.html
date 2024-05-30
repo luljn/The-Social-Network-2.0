@@ -14,7 +14,7 @@
             <label for="password" class="form-label"></label>
             <input type="password" class="form-control" id="password" formControlName="password" placeholder="Mot de passe">
           </div>
-          <button type="submit" class="btn btn-primary w-100 fs-5 fw-bold" [disabled]="loginForm.invalid">Se connecter</button>
+          <button type="submit" class="btn btn-primary w-100 fs-5 fw-bold" (click)="onConnectUser()" [disabled]="loginForm.invalid">Se connecter</button>
           <hr>
           <button type="button" class="btn btn-success w-100 fs-5 fw-bold" (click)="onNaviguateToSignupPage()">Créer un nouveau compte</button>
         </form>
