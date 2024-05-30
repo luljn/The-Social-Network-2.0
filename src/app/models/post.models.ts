@@ -1,4 +1,4 @@
-export class FaceSnap {
+export class Post {
 
     id!: number;
     id_utilisateur!: number;
