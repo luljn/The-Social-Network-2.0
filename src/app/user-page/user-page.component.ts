@@ -26,5 +26,6 @@ export class UserPageComponent implements OnInit {
 
   ngOnInit(): void {
       
+    this.userPosts$ = this.postService.getPostsByUser(this.user.id);
   }
 }
