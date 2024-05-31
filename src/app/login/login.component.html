@@ -1,0 +1,23 @@
+<div class="container-fluid my-5">
+    <div class="row justify-content-center my-5">
+      <div class="col-8 col-sm-8 col-md-6 col-lg-4">
+        <div>
+          <h5 class="text-center text-primary fw-bold my-5">THE SOCIAL NETWORK</h5>
+        </div>
+        <form [formGroup]="loginForm" class="border p-4 shadow rounded text-bg-light">
+          <h2 class="text-center mb-4 fs-5">Se connecter à TSN</h2>
+          <div class="mb-0">
+            <label for="email" class="form-label"></label>
+            <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp" placeholder="Adresse mail">
+          </div>
+          <div class="mb-5">
+            <label for="password" class="form-label"></label>
+            <input type="password" class="form-control" id="password" formControlName="password" placeholder="Mot de passe">
+          </div>
+          <button type="submit" class="btn btn-primary w-100 fs-5 fw-bold" (click)="onConnectUser()" [disabled]="loginForm.invalid">Se connecter</button>
+          <hr>
+          <button type="button" class="btn btn-success w-100 fs-5 fw-bold" (click)="onNaviguateToSignupPage()">Créer un nouveau compte</button>
+        </form>
+      </div>
+    </div>
+</div>
