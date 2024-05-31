@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SignupComponent } from './signup/signup.component';
+import { UserComponent } from './user/user.component';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,8 @@ import { SignupComponent } from './signup/signup.component';
     FooterComponent,
     LoginComponent,
     SignupComponent,
-    HomeComponent
+    HomeComponent,
+    UserComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

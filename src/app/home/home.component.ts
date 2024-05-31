@@ -4,12 +4,14 @@ import { Post } from '../models/post.models';
 import { PostServices } from '../services/post.services';
 import { PostComponent } from '../post/post.component';
 import { AsyncPipe, NgFor } from '@angular/common';
+import { UserComponent } from '../user/user.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
     PostComponent,
+    UserComponent,
     NgFor,
     AsyncPipe
   ],
