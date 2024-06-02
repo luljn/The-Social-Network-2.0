@@ -1,8 +1,8 @@
 <div id="user" class="card position-sticky" style="top: 150px;">
-    <img src="https://picsum.photos/1920/1080?random=4" class="card-img-top img-fluid" alt="...">
+    <img [src]="user.profile_photo" class="card-img-top img-fluid" alt="...">
     <div class="card-body">
-      <h5 class="card-title fw-bold mb-4 mt-2 text-center">Nom Utilisateur</h5>
-      <p class="card-text mb-4 text-center">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+      <h5 class="card-title fw-bold mb-4 mt-2 text-center">{{ user.prenom + " " + user.nom }}</h5>
+      <p class="card-text mb-4 text-center">{{ user.description }}</p>
       <div class="text-center">
         <a class="btn btn-primary">Mon compte</a>
       </div>

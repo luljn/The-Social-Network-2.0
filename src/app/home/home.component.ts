@@ -6,6 +6,7 @@ import { PostComponent } from '../post/post.component';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { UserComponent } from '../user/user.component';
 import { User } from '../models/user.models';
+import { UserServices } from '../services/user.services';
 
 @Component({
   selector: 'app-home',
@@ -22,26 +23,36 @@ import { User } from '../models/user.models';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-  user?: User;
+  user?: User | null;
+  isUserConnected!: boolean;
   posts$!: Observable<Post[]>;
+  users$!: Observable<User[]>;
 
-  constructor(private postService: PostServices){}
+  constructor(private postService: PostServices,
+              private userService: UserServices){}
 
   ngOnInit(): void {
       
     this.posts$ = this.postService.getAllPosts();
-    this.getUser();
+    if(this.getUser() !== null){
+
+      this.user = this.getUser();
+    }
   }
 
   ngOnDestroy(): void {}
 
-  getUser(): void{
+  getUser(): User | null {
 
     const connnectedUser = localStorage.getItem('connectedUser');
 
     if (connnectedUser) {
-    
-      this.user = JSON.parse(connnectedUser) as User;
+      
+      const newuser = JSON.parse(connnectedUser) as User;
+      this.users$ = this.userService.getAllUsersWithoutTheCurrent(newuser.id);
+      return newuser;
     }
+
+    return null;
   }
 }
