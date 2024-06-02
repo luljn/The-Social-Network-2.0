@@ -14,4 +14,9 @@ export class UserServices {
 
         return this.http.get<User[]>("http://localhost:3000/utilisateur");
     }
+
+    getUserByEmail(email: string): Observable<User>{
+
+        return this.http.get<User>(`http://localhost:3000/utilisateur?email=${email}`);
+    }
 }

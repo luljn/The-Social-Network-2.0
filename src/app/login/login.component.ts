@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../services/auth.services';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
   emailRegex!: RegExp;   // To verify the format of the user email address.
 
   constructor(private formBuilder: FormBuilder,
+              private auth: AuthService,
               private router: Router){}
 
   ngOnInit(): void {
@@ -36,6 +38,19 @@ export class LoginComponent implements OnInit {
 
   onConnectUser(): void{
 
-    this.router.navigateByUrl('/home');
+    this.auth.login(this.loginForm.value).subscribe(success => {
+
+      if (success) {
+        this.router.navigateByUrl('/home');
+      } else {
+        alert('Login failed');
+      }
+    });
+  //   if(this.auth.login(this.loginForm.value)){
+  //     this.router.navigateByUrl('/home');
+  //   }
+  //   else{
+  //     alert('Login failed');
+  //   }
   }
 }
