@@ -5,6 +5,7 @@ import { User } from "../models/user.models";
 import { Observable, of } from "rxjs";
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient } from "@angular/common/http";
+import { Router } from "@angular/router";
 
 
 
@@ -46,5 +47,10 @@ export class AuthService {
             }),
             catchError(() => of(false))
         );
+    }
+
+    logout(): void{
+
+        localStorage.removeItem('connectedUser');
     }
 }

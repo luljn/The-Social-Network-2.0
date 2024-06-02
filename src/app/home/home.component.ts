@@ -44,11 +44,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   getUser(): User | null {
 
-    const connnectedUser = localStorage.getItem('connectedUser');
+    const connectedUser = localStorage.getItem('connectedUser');
 
-    if (connnectedUser) {
+    if (connectedUser) {
       
-      const newuser = JSON.parse(connnectedUser) as User;
+      const newuser = JSON.parse(connectedUser) as User;
       this.users$ = this.userService.getAllUsersWithoutTheCurrent(newuser.id);
       return newuser;
     }
