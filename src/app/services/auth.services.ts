@@ -38,6 +38,7 @@ export class AuthService {
             map(users => {
             if (users.length > 0) {
                 this.loggedIn = true;
+                localStorage.setItem('connectedUser', JSON.stringify(users[0]));
                 return true;
             } else {
                 return false;

@@ -3,8 +3,9 @@ import { Observable } from 'rxjs';
 import { Post } from '../models/post.models';
 import { PostServices } from '../services/post.services';
 import { PostComponent } from '../post/post.component';
-import { AsyncPipe, NgFor } from '@angular/common';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { UserComponent } from '../user/user.component';
+import { User } from '../models/user.models';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,7 @@ import { UserComponent } from '../user/user.component';
     PostComponent,
     UserComponent,
     NgFor,
+    NgIf,
     AsyncPipe
   ],
   templateUrl: './home.component.html',
@@ -20,6 +22,7 @@ import { UserComponent } from '../user/user.component';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
+  user?: User;
   posts$!: Observable<Post[]>;
 
   constructor(private postService: PostServices){}
@@ -27,10 +30,18 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
       
     this.posts$ = this.postService.getAllPosts();
+    this.getUser();
   }
 
-  ngOnDestroy(): void {
-      
-  }
+  ngOnDestroy(): void {}
 
+  getUser(): void{
+
+    const connnectedUser = localStorage.getItem('connectedUser');
+
+    if (connnectedUser) {
+    
+      this.user = JSON.parse(connnectedUser) as User;
+    }
+  }
 }

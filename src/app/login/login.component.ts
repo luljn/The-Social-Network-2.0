@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
       email: [null, [Validators.required, Validators.pattern(this.emailRegex)]],
       password: [null, Validators.required]
     });
+    // localStorage.removeItem('connectedUser');
   }
 
   onNaviguateToSignupPage(): void{
