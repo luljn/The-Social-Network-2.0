@@ -10,6 +10,19 @@ export class UserServices {
 
     constructor(private http: HttpClient){}
 
+    getConnectedUser(): User | null {
+
+        const connnectedUser = localStorage.getItem('connectedUser');
+    
+        if (connnectedUser) {
+          
+          const newuser = JSON.parse(connnectedUser) as User;
+          return newuser;
+        }
+    
+        return null;
+    }
+
     getAllUsers(): Observable<User[]>{
 
         return this.http.get<User[]>("http://localhost:3000/utilisateur");

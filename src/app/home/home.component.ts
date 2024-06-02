@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
       
     this.posts$ = this.postService.getAllPosts();
-    if(this.getUser() !== null){
+    if(this.userService.getConnectedUser() !== null){
 
       this.user = this.getUser();
     }
