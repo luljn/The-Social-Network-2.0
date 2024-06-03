@@ -7,6 +7,7 @@ import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { UserComponent } from '../user/user.component';
 import { User } from '../models/user.models';
 import { UserServices } from '../services/user.services';
+import { LocalStorageService } from '../services/localstorage.services';
 
 @Component({
   selector: 'app-home',
@@ -29,7 +30,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   users$!: Observable<User[]>;
 
   constructor(private postService: PostServices,
-              private userService: UserServices){}
+              private userService: UserServices,
+              private localstorageService: LocalStorageService){}
 
   ngOnInit(): void {
       
@@ -38,13 +40,18 @@ export class HomeComponent implements OnInit, OnDestroy {
 
       this.user = this.getUser();
     }
+
+    else{
+
+      this.user = null;
+    }
   }
 
   ngOnDestroy(): void {}
 
   getUser(): User | null {
 
-    const connectedUser = localStorage.getItem('connectedUser');
+    const connectedUser = this.localstorageService.getItem('connectedUser');
 
     if (connectedUser) {
       

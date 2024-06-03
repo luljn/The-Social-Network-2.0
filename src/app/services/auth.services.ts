@@ -6,6 +6,7 @@ import { Observable, of } from "rxjs";
 import { catchError, map } from 'rxjs/operators';
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
+import { LocalStorageService } from "./localstorage.services";
 
 
 
@@ -18,7 +19,8 @@ export class AuthService {
     private loggedIn = false;
 
     constructor(private http: HttpClient,
-                private userService: UserServices
+                private userService: UserServices,
+                private localstorageService: LocalStorageService
     ){}
 
     verifyUserEmail(email: string): boolean{
@@ -39,7 +41,7 @@ export class AuthService {
             map(users => {
             if (users.length > 0) {
                 this.loggedIn = true;
-                localStorage.setItem('connectedUser', JSON.stringify(users[0]));
+                this.localstorageService.setItem('connectedUser', JSON.stringify(users[0]));
                 return true;
             } else {
                 return false;
@@ -51,6 +53,6 @@ export class AuthService {
 
     logout(): void{
 
-        localStorage.removeItem('connectedUser');
+        this.localstorageService.removeItem('connectedUser');
     }
 }

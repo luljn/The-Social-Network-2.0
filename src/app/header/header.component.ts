@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { User } from '../models/user.models';
 import { UserServices } from '../services/user.services';
 import { NgIf } from '@angular/common';
 import { AuthService } from '../services/auth.services';
-import { AsyncLocalStorage } from 'node:async_hooks';
+import { LocalStorageService } from '../services/localstorage.services';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -18,14 +19,15 @@ import { AsyncLocalStorage } from 'node:async_hooks';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
 
   searchForm!: FormGroup;
   user?: User | null;
+  private storageSubscription!: Subscription;
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
-              private userService: UserServices,
+              private localstorageService: LocalStorageService,
               private auth: AuthService){}
 
   ngOnInit(): void {
@@ -35,10 +37,19 @@ export class HeaderComponent implements OnInit {
       search: [null, Validators.required] 
     });
 
-    if(this.getUser() != null){
+    
+    this.storageSubscription = this.localstorageService.watchStorage().subscribe(() => {
+      
+      if(this.getUser() != null){
 
-      this.user = this.getUser();
-    }
+        this.user = this.getUser();
+      }
+
+      else{
+
+        this.user = null;
+      }
+    });
   }
 
   getUser(): User | null {
@@ -56,8 +67,15 @@ export class HeaderComponent implements OnInit {
 
   onDisconnectUser(): void{
 
-    this.auth.logout;
-    localStorage.removeItem('connectedUser');
+    this.auth.logout();
     this.router.navigateByUrl("");
+  }
+
+  ngOnDestroy(): void {
+
+    if (this.storageSubscription) {
+      
+      this.storageSubscription.unsubscribe();
+    }
   }
 }
