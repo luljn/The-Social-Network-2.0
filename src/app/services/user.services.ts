@@ -2,26 +2,29 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { User } from "../models/user.models";
+import { LocalStorageService } from "./localstorage.services";
 
 @Injectable({
     providedIn: 'root'
 })
-export class UserServices {
+export class UserService {
 
-    constructor(private http: HttpClient){}
+    constructor(private http: HttpClient,
+                private localstorageService: LocalStorageService
+    ){}
 
-    // getConnectedUser(): User | null {
+    getConnectedUser(): User | null {
 
-    //     const connnectedUser = localStorage.getItem('connectedUser');
+        const connectedUser = this.localstorageService.getItem('connectedUser');
     
-    //     if (connnectedUser) {
+        if (connectedUser) {
           
-    //       const newuser = JSON.parse(connnectedUser) as User;
-    //       return newuser;
-    //     }
+          const newuser = JSON.parse(connectedUser) as User;
+          return newuser;
+        }
     
-    //     return null;
-    // }
+        return null;
+    }
 
     getAllUsers(): Observable<User[]>{
 

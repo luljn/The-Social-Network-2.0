@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { UserServices } from "./user.services";
+import { UserService } from "./user.services";
 import * as CryptoJS from 'crypto-js';
 import { User } from "../models/user.models";
 import { Observable, of } from "rxjs";
@@ -18,7 +18,7 @@ export class AuthService {
     private loggedIn = false;
 
     constructor(private http: HttpClient,
-                private userService: UserServices,
+                private userService: UserService,
                 private localstorageService: LocalStorageService
     ){}
 
@@ -30,19 +30,6 @@ export class AuthService {
         }
 
         return false;
-    }
-
-    getUser(): User | null {
-
-        const connectedUser = this.localstorageService.getItem('connectedUser');
-    
-        if (connectedUser) {
-          
-          const newuser = JSON.parse(connectedUser) as User;
-          return newuser;
-        }
-    
-        return null;
     }
     
     login(formValue: {email: string, password: string}): Observable<boolean> {

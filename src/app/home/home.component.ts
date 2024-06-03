@@ -6,7 +6,7 @@ import { PostComponent } from '../post/post.component';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { UserComponent } from '../user/user.component';
 import { User } from '../models/user.models';
-import { UserServices } from '../services/user.services';
+import { UserService } from '../services/user.services';
 import { LocalStorageService } from '../services/localstorage.services';
 
 @Component({
@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   users$!: Observable<User[]>;
 
   constructor(private postService: PostServices,
-              private userService: UserServices,
+              private userService: UserService,
               private localstorageService: LocalStorageService){}
 
   ngOnInit(): void {

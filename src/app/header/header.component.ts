@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { User } from '../models/user.models';
-import { UserServices } from '../services/user.services';
+import { UserService } from '../services/user.services';
 import { NgIf } from '@angular/common';
 import { AuthService } from '../services/auth.services';
 import { LocalStorageService } from '../services/localstorage.services';
@@ -28,7 +28,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(private formBuilder: FormBuilder,
               private router: Router,
               private localstorageService: LocalStorageService,
-              private auth: AuthService){}
+              private auth: AuthService,
+              private userService: UserService){}
 
   ngOnInit(): void {
       
@@ -40,9 +41,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     
     this.storageSubscription = this.localstorageService.watchStorage().subscribe(() => {
       
-      if(this.auth.getUser() != null){
+      if(this.userService.getConnectedUser() != null){
 
-        this.user = this.auth.getUser();
+        this.user = this.userService.getConnectedUser();
       }
 
       else{
@@ -51,19 +52,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
       }
     });
   }
-
-  // getUser(): User | null {
-
-  //   const connectedUser = localStorage.getItem('connectedUser');
-
-  //   if (connectedUser) {
-      
-  //     const newuser = JSON.parse(connectedUser) as User;
-  //     return newuser;
-  //   }
-
-  //   return null;
-  // }
 
   onDisconnectUser(): void{
 
