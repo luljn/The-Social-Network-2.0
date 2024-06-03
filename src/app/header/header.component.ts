@@ -5,6 +5,7 @@ import { User } from '../models/user.models';
 import { UserServices } from '../services/user.services';
 import { NgIf } from '@angular/common';
 import { AuthService } from '../services/auth.services';
+import { AsyncLocalStorage } from 'node:async_hooks';
 
 @Component({
   selector: 'app-header',
@@ -34,15 +35,29 @@ export class HeaderComponent implements OnInit {
       search: [null, Validators.required] 
     });
 
-    if(this.userService.getConnectedUser() != null){
+    if(this.getUser() != null){
 
-      this.user = this.userService.getConnectedUser();
+      this.user = this.getUser();
     }
+  }
+
+  getUser(): User | null {
+
+    const connectedUser = localStorage.getItem('connectedUser');
+
+    if (connectedUser) {
+      
+      const newuser = JSON.parse(connectedUser) as User;
+      return newuser;
+    }
+
+    return null;
   }
 
   onDisconnectUser(): void{
 
     this.auth.logout;
+    localStorage.removeItem('connectedUser');
     this.router.navigateByUrl("");
   }
 }

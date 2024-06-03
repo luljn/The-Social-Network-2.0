@@ -10,18 +10,18 @@ export class UserServices {
 
     constructor(private http: HttpClient){}
 
-    getConnectedUser(): User | null {
+    // getConnectedUser(): User | null {
 
-        const connnectedUser = localStorage.getItem('connectedUser');
+    //     const connnectedUser = localStorage.getItem('connectedUser');
     
-        if (connnectedUser) {
+    //     if (connnectedUser) {
           
-          const newuser = JSON.parse(connnectedUser) as User;
-          return newuser;
-        }
+    //       const newuser = JSON.parse(connnectedUser) as User;
+    //       return newuser;
+    //     }
     
-        return null;
-    }
+    //     return null;
+    // }
 
     getAllUsers(): Observable<User[]>{
 
