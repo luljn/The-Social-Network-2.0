@@ -15,7 +15,6 @@ import { LocalStorageService } from "./localstorage.services";
 })
 export class AuthService {
 
-    private user$!: Observable<User>;
     private loggedIn = false;
 
     constructor(private http: HttpClient,
@@ -31,6 +30,19 @@ export class AuthService {
         }
 
         return false;
+    }
+
+    getUser(): User | null {
+
+        const connectedUser = this.localstorageService.getItem('connectedUser');
+    
+        if (connectedUser) {
+          
+          const newuser = JSON.parse(connectedUser) as User;
+          return newuser;
+        }
+    
+        return null;
     }
     
     login(formValue: {email: string, password: string}): Observable<boolean> {

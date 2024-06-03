@@ -40,9 +40,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     
     this.storageSubscription = this.localstorageService.watchStorage().subscribe(() => {
       
-      if(this.getUser() != null){
+      if(this.auth.getUser() != null){
 
-        this.user = this.getUser();
+        this.user = this.auth.getUser();
       }
 
       else{
@@ -52,18 +52,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
   }
 
-  getUser(): User | null {
+  // getUser(): User | null {
 
-    const connectedUser = localStorage.getItem('connectedUser');
+  //   const connectedUser = localStorage.getItem('connectedUser');
 
-    if (connectedUser) {
+  //   if (connectedUser) {
       
-      const newuser = JSON.parse(connectedUser) as User;
-      return newuser;
-    }
+  //     const newuser = JSON.parse(connectedUser) as User;
+  //     return newuser;
+  //   }
 
-    return null;
-  }
+  //   return null;
+  // }
 
   onDisconnectUser(): void{
 
@@ -74,7 +74,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
 
     if (this.storageSubscription) {
-      
+
       this.storageSubscription.unsubscribe();
     }
   }
