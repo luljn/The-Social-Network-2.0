@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
       email: [null, [Validators.required, Validators.pattern(this.emailRegex)]],
       password: [null, Validators.required]
     });
-    // localStorage.removeItem('connectedUser');
   }
 
   onNaviguateToSignupPage(): void{
@@ -41,17 +40,15 @@ export class LoginComponent implements OnInit {
 
     this.auth.login(this.loginForm.value).subscribe(success => {
 
-      if (success) {
+      if (success){
+
         this.router.navigateByUrl('/home');
-      } else {
+      }
+      
+      else{
+
         alert('Login failed');
       }
     });
-  //   if(this.auth.login(this.loginForm.value)){
-  //     this.router.navigateByUrl('/home');
-  //   }
-  //   else{
-  //     alert('Login failed');
-  //   }
   }
 }

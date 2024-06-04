@@ -8,6 +8,7 @@ import { UserComponent } from '../user/user.component';
 import { User } from '../models/user.models';
 import { UserService } from '../services/user.services';
 import { LocalStorageService } from '../services/localstorage.services';
+import { PotentialFollowComponent } from '../potential-follow/potential-follow.component';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,8 @@ import { LocalStorageService } from '../services/localstorage.services';
     UserComponent,
     NgFor,
     NgIf,
-    AsyncPipe
+    AsyncPipe,
+    PotentialFollowComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
@@ -27,7 +29,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   user?: User | null;
   isUserConnected!: boolean;
   posts$!: Observable<Post[]>;
-  users$!: Observable<User[]>;
 
   constructor(private postService: PostServices,
               private userService: UserService,
@@ -36,9 +37,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
       
     this.posts$ = this.postService.getAllPosts();
-    if(this.getUser() !== null){
+    if(this.userService.getConnectedUser() !== null){
 
-      this.user = this.getUser();
+      this.user = this.userService.getConnectedUser()
     }
 
     else{
@@ -48,18 +49,4 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {}
-
-  getUser(): User | null {
-
-    const connectedUser = this.localstorageService.getItem('connectedUser');
-
-    if (connectedUser) {
-      
-      const newuser = JSON.parse(connectedUser) as User;
-      this.users$ = this.userService.getAllUsersWithoutTheCurrent(newuser.id);
-      return newuser;
-    }
-
-    return null;
-  }
 }

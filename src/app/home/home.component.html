@@ -15,37 +15,7 @@
             </div>
 
             <div *ngIf="user" class="col-12 col-sm-12 col-md-3 col-lg-2 my-5">
-              <h5 class="text-center fs-5 fw-bold text-primary position-sticky" style="top: 97px;">Découvrez d'autres utilisateurs 👨👩</h5>
-              <div class="position-fixed text-center mx-5">
-                <button type="button" class="btn btn-primary btn-block justify-content-center mt-3" data-bs-toggle="modal" data-bs-target="#usersNotFollowed">
-                    <i class="bi bi-plus-circle"></i>
-                    Découvrir 
-                </button>
-              </div>
-
-              <div class="modal fade" id="usersNotFollowed" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Connaissez-vous ?</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        
-                            <div class="modal-body">
-                                <div class="mb-3 d-flex flex-row justify-content-between" *ngFor="let otherUser of users$ | async">
-                                    <img [src]="otherUser.profile_photo" width="50" height="50">
-                                    <h5 class="fs-5 fw-bold">{{ otherUser.prenom + " " + otherUser.nom }}</h5>
-                                    <button type="button" class="btn btn-primary">Follow</button>
-                                </div>
-                            </div>
-                        
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                        </div>
-                    </div>
-                </div>
-              </div>        
-
+                <app-potential-follow></app-potential-follow>
             </div>
 
         </div>    

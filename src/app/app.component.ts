@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SignupComponent } from './signup/signup.component';
 import { UserComponent } from './user/user.component';
 import { LocalStorageService } from './services/localstorage.services';
+import { PotentialFollowComponent } from './potential-follow/potential-follow.component';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,8 @@ import { LocalStorageService } from './services/localstorage.services';
     LoginComponent,
     SignupComponent,
     HomeComponent,
-    UserComponent
+    UserComponent,
+    PotentialFollowComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
