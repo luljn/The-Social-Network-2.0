@@ -2,13 +2,14 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Post } from '../models/post.models';
 import { PostServices } from '../services/post.services';
 import { Router } from '@angular/router';
-import { DatePipe } from '@angular/common';
+import { DatePipe, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-post',
   standalone: true,
   imports: [
-    DatePipe
+    DatePipe,
+    NgIf
   ],
   templateUrl: './post.component.html',
   styleUrl: './post.component.css'

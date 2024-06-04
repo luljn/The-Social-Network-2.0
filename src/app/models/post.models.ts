@@ -4,6 +4,6 @@ export class Post {
     id_utilisateur!: number;
     contenu!: string;
     date_creation!: Date;
-    image!: string;
+    image?: string;
     sensible!: boolean;
 }
