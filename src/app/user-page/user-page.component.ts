@@ -1,31 +1,45 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UserComponent } from '../user/user.component';
-import { UserServices } from '../services/user.services';
+import { UserService } from '../services/user.services';
 import { User } from '../models/user.models';
 import { Post } from '../models/post.models';
 import { Observable } from 'rxjs';
 import { PostServices } from '../services/post.services';
+import { ActivatedRoute } from '@angular/router';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { PostComponent } from '../post/post.component';
 
 @Component({
   selector: 'app-user-page',
   standalone: true,
   imports: [
-    UserComponent
+    UserComponent,
+    PostComponent,
+    NgIf,
+    AsyncPipe
   ],
   templateUrl: './user-page.component.html',
   styleUrl: './user-page.component.css'
 })
 export class UserPageComponent implements OnInit {
 
-  @Input() user!: User;
+  user$!: Observable<User>;
   userPosts$!: Observable<Post[]>;
 
-  constructor(private userService: UserServices,
-              private postService: PostServices
+  constructor(private userService: UserService,
+              private postService: PostServices,
+              private route: ActivatedRoute
   ){}
 
   ngOnInit(): void {
-      
-    this.userPosts$ = this.postService.getPostsByUser(this.user.id);
+    
+    this.getInformations();
+  }
+
+  getInformations(): void{
+
+    const userId = +this.route.snapshot.params['id'];
+    this.userPosts$ = this.postService.getPostsByUser(userId);
+    this.user$ = this.userService.getUserById(userId);
   }
 }

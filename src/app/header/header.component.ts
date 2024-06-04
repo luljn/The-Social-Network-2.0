@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { User } from '../models/user.models';
 import { UserService } from '../services/user.services';
 import { NgIf } from '@angular/common';
@@ -14,6 +14,7 @@ import { Subscription } from 'rxjs';
   imports: [
     ReactiveFormsModule,
     RouterLink,
+    RouterLinkActive,
     NgIf
   ],
   templateUrl: './header.component.html',
@@ -57,6 +58,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     this.auth.logout();
     this.router.navigateByUrl("");
+  }
+
+  onGetUserPersonnalPage(): void{
+
+    const userId = this.user?.id;
+    this.router.navigateByUrl(`/users/${userId}`);
   }
 
   ngOnDestroy(): void {
