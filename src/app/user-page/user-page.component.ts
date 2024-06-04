@@ -6,7 +6,7 @@ import { Post } from '../models/post.models';
 import { Observable } from 'rxjs';
 import { PostServices } from '../services/post.services';
 import { ActivatedRoute } from '@angular/router';
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { PostComponent } from '../post/post.component';
 
 @Component({
@@ -16,6 +16,7 @@ import { PostComponent } from '../post/post.component';
     UserComponent,
     PostComponent,
     NgIf,
+    NgFor,
     AsyncPipe
   ],
   templateUrl: './user-page.component.html',
@@ -39,7 +40,7 @@ export class UserPageComponent implements OnInit {
   getInformations(): void{
 
     const userId = +this.route.snapshot.params['id'];
-    this.userPosts$ = this.postService.getPostsByUser(userId);
     this.user$ = this.userService.getUserById(userId);
+    this.userPosts$ = this.postService.getPostsByUser(userId);
   }
 }
