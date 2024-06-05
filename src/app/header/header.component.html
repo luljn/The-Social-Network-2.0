@@ -21,12 +21,12 @@
                     </a>
                 </li>
                 <li *ngIf="user" class="nav-item text-light mx-2">
-                  <a routerLink="/statistiques" routerLinkActive="active" [routerLinkActiveOptions]="{ exact : true }" class="nav-link" data-bs-toggle="tooltip" title="Statistiques">
+                  <a routerLink="/statistics" routerLinkActive="active" [routerLinkActiveOptions]="{ exact : true }" class="nav-link" data-bs-toggle="tooltip" title="Statistiques">
                       <i class="bi bi-bar-chart text-light fs-3"></i>
                   </a>
                 </li>
                 <li *ngIf="user" class="nav-item text-light mx-2">
-                    <a routerLink="/nouveauPost" routerLinkActive="active" [routerLinkActiveOptions]="{ exact : true }" class="nav-link" data-bs-toggle="tooltip" title="Nouveau post">
+                    <a routerLink="/new-post" routerLinkActive="active" [routerLinkActiveOptions]="{ exact : true }" class="nav-link" data-bs-toggle="tooltip" title="Nouveau post">
                         <i class="bi bi-plus-square text-light fs-3"></i>
                     </a>
                   </li>
@@ -47,10 +47,10 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <li><button class="dropdown-item" (click)="onGetUserPersonnalPage()">Mon compte</button></li>
-                      <li><button *ngIf="user.admin" class="dropdown-item">Espace Admin</button></li>
+                      <li><button *ngIf="user.admin" (click)="onGetAdminPage()" class="dropdown-item">Espace Admin</button></li>
                       <li><button class="dropdown-item" (click)="onDisconnectUser()">Se Déconnecter</button></li>
                       <li><hr class="dropdown-divider"></li>
-                      <li><button class="dropdown-item">A propos de TSN</button></li>
+                      <li><button (click)="onGetAboutPage()" class="dropdown-item">A propos de TSN</button></li>
                     </ul>
                   </li>
             </ul>

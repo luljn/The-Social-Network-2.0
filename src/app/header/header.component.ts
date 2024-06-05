@@ -66,6 +66,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl(`/users/${userId}`);
   }
 
+  onGetAdminPage(): void{
+
+    this.router.navigateByUrl(`/admin`);
+  }
+
+  onGetAboutPage(): void{
+
+    this.router.navigateByUrl(`/about`);
+  }
+
   ngOnDestroy(): void {
 
     if (this.storageSubscription) {
