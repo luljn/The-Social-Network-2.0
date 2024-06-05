@@ -12,6 +12,7 @@ import { PotentialFollowComponent } from './potential-follow/potential-follow.co
 import { UserPageComponent } from './user-page/user-page.component';
 import { ProfileComponent } from './profile/profile.component';
 import { NotificationsPageComponent } from './notifications-page/notifications-page.component';
+import { StatistiquesComponent } from './statistiques/statistiques.component';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +29,8 @@ import { NotificationsPageComponent } from './notifications-page/notifications-p
     PotentialFollowComponent,
     UserPageComponent,
     ProfileComponent,
-    NotificationsPageComponent
+    NotificationsPageComponent,
+    StatistiquesComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
