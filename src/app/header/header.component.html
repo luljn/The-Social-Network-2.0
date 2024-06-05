@@ -10,36 +10,47 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item text-light mx-2">
-                    <a routerLink="/home" class="nav-link"  data-bs-toggle="tooltip" title="Accueil">
+                <li *ngIf="user" class="nav-item text-light mx-2">
+                    <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact : true }" class="nav-link" data-bs-toggle="tooltip" title="Accueil">
                         <i class="bi bi-house text-light fs-3"></i>
                     </a>
                 </li>
-                <li class="nav-item text-light mx-2">
-                    <a href="" class="nav-link"  data-bs-toggle="tooltip" title="Notifications">
-                        <i class="bi bi-bell  text-light fs-3"></i>
+                <li *ngIf="user" class="nav-item text-light mx-2">
+                    <a routerLink="/notifications" routerLinkActive="active" [routerLinkActiveOptions]="{ exact : true }" class="nav-link" data-bs-toggle="tooltip" title="Notifications">
+                        <i class="bi bi-bell text-light fs-3"></i>
                     </a>
                 </li>
-                <li class="nav-item text-light mx-2">
-                  <a href="" class="nav-link"  data-bs-toggle="tooltip" title="Statistiques">
-                      <i class="bi bi-bar-chart  text-light fs-3"></i>
+                <li *ngIf="user" class="nav-item text-light mx-2">
+                  <a routerLink="/statistics" routerLinkActive="active" [routerLinkActiveOptions]="{ exact : true }" class="nav-link" data-bs-toggle="tooltip" title="Statistiques">
+                      <i class="bi bi-bar-chart text-light fs-3"></i>
                   </a>
-              </li>
+                </li>
+                <li *ngIf="user" class="nav-item text-light mx-2">
+                    <a routerLink="/new-post" routerLinkActive="active" [routerLinkActiveOptions]="{ exact : true }" class="nav-link" data-bs-toggle="tooltip" title="Nouveau post">
+                        <i class="bi bi-plus-square text-light fs-3"></i>
+                    </a>
+                  </li>
                 <div class="container-fluid fs-3">
                     <form [formGroup]="searchForm" class="d-flex mt-2 ms-5 me-2">
                       <input class="form-control me-2" type="search" placeholder="Rechercher..." aria-label="Search" formControlName="search">
                       <button class="btn text-light" type="submit" [disabled]="searchForm.invalid"><i class="bi bi-search" data-bs-toggle="tooltip" title="Recherche"></i></button>
                     </form>
                 </div>
-                <li class="nav-item dropdown mx-2">
+                <li *ngIf="user" class="nav-item dropdown mx-2">
                     <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-person-circle text-light fs-3"></i>
+                        @if(user.admin){
+                            <i class="bi bi-person-check-fill text-light fs-3"></i>
+                        }
+                        @else{
+                            <i class="bi bi-person-fill text-light fs-3"></i>
+                        }
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <li><a class="dropdown-item" href="">Mon compte</a></li>
-                      <li><a class="dropdown-item" href="">Se Déconnecter</a></li>
+                      <li><button class="dropdown-item" (click)="onGetUserPersonnalPage()">Mon compte</button></li>
+                      <li><button *ngIf="user.admin" (click)="onGetAdminPage()" class="dropdown-item">Espace Admin</button></li>
+                      <li><button class="dropdown-item" (click)="onDisconnectUser()">Se Déconnecter</button></li>
                       <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="">A propos de TSN</a></li>
+                      <li><button (click)="onGetAboutPage()" class="dropdown-item">A propos de TSN</button></li>
                     </ul>
                   </li>
             </ul>

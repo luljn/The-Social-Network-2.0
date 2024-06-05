@@ -1,6 +1,19 @@
 <div class="card">
-    <h2>{{ post.id_utilisateur }}</h2>
-    <img [src]="post.image" alt="">
+    <div class="mb-3 d-flex flex-row justify-content-between">
+        <h2>{{ post.id_utilisateur }}</h2>
+        <h5>{{ post.date_creation | date: 'd MMMM yyyy' }}</h5>
+    </div>
+    <hr class="">
+    <img *ngIf="post.image" [src]="post.image" alt="">
+    <hr *ngIf="post.image" class="">
     <p>{{ post.contenu }}</p>
-    <p>Le {{ post.date_creation }}</p>
+    <hr class="">
+    <div *ngIf="connectedUser" class="d-flex flex-row mx-2 mb-2">
+        <button type="button" class="btn btn-unstyled">
+            <i class="bi bi-hand-thumbs-up fs-3 text-primary mx-2" data-bs-toggle="tooltip" title="Like"></i>
+        </button><p class="fs-3 me-4 text-secondary">0</p>
+        <button type="button" class="btn btn-unstyled" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom<?= $post->getID() ?>" aria-controls="offcanvasBottom">
+            <i class="bi bi-chat fs-3 text-primary mx-2" data-bs-toggle="tooltip" title="Commenter"></i>
+        </button><p class="fs-3 me-4 text-secondary">0</p>
+    </div>
 </div>

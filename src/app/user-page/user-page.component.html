@@ -1,1 +1,25 @@
-<app-user></app-user>
+<section class="mt-5">
+
+    <div class="container mt-5 d-flex flex-row">
+
+        <div class="row">
+
+            <div class="col-6 col-sm-6 col-md-3 col-lg-2 mt-5">
+                <h5 class="text-center fs-5 fw-bold text-secondary mb-4 position-sticky" style="top: 97px">Vous</h5>
+                <app-user *ngIf="user$ | async as user" [user]="user"></app-user>
+            </div>
+            
+            <div class="col-12 col-sm-12 col-md-6 col-lg-8 my-5">
+                <app-post *ngFor="let userPost of userPosts$ | async" [post]="userPost">
+                </app-post>
+            </div>
+
+            <!-- <div *ngIf="user" class="col-12 col-sm-12 col-md-3 col-lg-2 my-5">
+                <app-potential-follow></app-potential-follow>
+            </div> -->
+
+        </div>    
+
+    </div>
+
+</section>

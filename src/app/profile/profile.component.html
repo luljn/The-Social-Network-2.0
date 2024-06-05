@@ -1,0 +1,37 @@
+<section>
+    <div class="container">
+        <div class="row">
+            <div *ngIf="user$ | async as user" class="col-12 col-sm-12 col-md-6 mt-5 mb-5 mb-sm-5 mb-md-5 offset-md-3">
+                @if(connectedUser?.id == user.id){ 
+                    <div class="card mt-5 border border-5">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-6">
+                                    <img [src]="user.profile_photo" class="card-img-top" alt="photo de profile" width="225" height="260">
+                                    <div class="card-body">
+                                        <a class="text-dark text-decoration-none" routerLink="/users/{{user.id}}">
+                                            <h5 class="card-title fs-5 fw-bold text-center">{{ user.prenom + " " + user.nom }}</h5>
+                                        </a>
+                                        <p class="card-text fs-5 text-center mt-3">{{ user.description }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-6"> 
+                                    <div class="container mt-5">
+                                        <div class="row gy-2">
+                                            <button type="button" class="btn btn-primary col-12" data-bs-toggle="modal" data-bs-target="#userInfosModal">Modifier mes infos personelles</button>
+                                            <button type="button" class="btn btn-primary col-12" data-bs-toggle="modal" data-bs-target="#userBirthdayModal">Modifier ma date de naissance</button>
+                                            <button type="button" class="btn btn-primary col-12" data-bs-toggle="modal" data-bs-target="#userPasswordModal">Modifier mon mot de passe</button>
+                                            <button type="button" class="btn btn-primary col-12" data-bs-toggle="modal" data-bs-target="#userPhotoModal">Modifier ma photo de profil</button>
+                                            <button type="button" class="btn btn-primary col-12" data-bs-toggle="modal" data-bs-target="#userDescriptionModal">Modifier ma description</button>
+                                            <button type="button" class="btn btn-primary col-12" data-bs-toggle="modal" data-bs-target="#userFollowingsModal">Gérer mes followings</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
