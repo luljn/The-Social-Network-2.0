@@ -20,7 +20,8 @@ import { AsyncPipe, NgIf } from '@angular/common';
 export class ProfileComponent implements OnInit{
 
   // @Input() user!: User;
-  user$! : Observable<User>;
+  user$!: Observable<User>;
+  connectedUser!: User | null ; // Connected User.
 
   constructor(private userService: UserService,
               private localstorageService: LocalStorageService,
@@ -36,5 +37,9 @@ export class ProfileComponent implements OnInit{
 
     const userId = +this.route.snapshot.params['id'];
     this.user$ = this.userService.getUserById(userId);
+    if(this.userService.getConnectedUser() !== null){
+
+      this.connectedUser = this.userService.getConnectedUser();
+    }
   }
 }
