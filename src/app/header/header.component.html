@@ -42,6 +42,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <li><button class="dropdown-item" (click)="onGetUserPersonnalPage()">Mon compte</button></li>
+                      <li><button *ngIf="user.admin" class="dropdown-item">Espace Admin</button></li>
                       <li><button class="dropdown-item" (click)="onDisconnectUser()">Se Déconnecter</button></li>
                       <li><hr class="dropdown-divider"></li>
                       <li><button class="dropdown-item">A propos de TSN</button></li>

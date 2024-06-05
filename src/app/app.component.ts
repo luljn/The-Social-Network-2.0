@@ -9,6 +9,8 @@ import { SignupComponent } from './signup/signup.component';
 import { UserComponent } from './user/user.component';
 import { LocalStorageService } from './services/localstorage.services';
 import { PotentialFollowComponent } from './potential-follow/potential-follow.component';
+import { UserPageComponent } from './user-page/user-page.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +24,9 @@ import { PotentialFollowComponent } from './potential-follow/potential-follow.co
     SignupComponent,
     HomeComponent,
     UserComponent,
-    PotentialFollowComponent
+    PotentialFollowComponent,
+    UserPageComponent,
+    ProfileComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
