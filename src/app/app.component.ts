@@ -11,6 +11,7 @@ import { LocalStorageService } from './services/localstorage.services';
 import { PotentialFollowComponent } from './potential-follow/potential-follow.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { ProfileComponent } from './profile/profile.component';
+import { NotificationsPageComponent } from './notifications-page/notifications-page.component';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,8 @@ import { ProfileComponent } from './profile/profile.component';
     UserComponent,
     PotentialFollowComponent,
     UserPageComponent,
-    ProfileComponent
+    ProfileComponent,
+    NotificationsPageComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

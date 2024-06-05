@@ -16,7 +16,7 @@
                     </a>
                 </li>
                 <li *ngIf="user" class="nav-item text-light mx-2">
-                    <a  class="nav-link"  data-bs-toggle="tooltip" title="Notifications">
+                    <a  routerLink="/notifications" routerLinkActive="active" [routerLinkActiveOptions]="{ exact : true }" class="nav-link"  data-bs-toggle="tooltip" title="Notifications">
                         <i class="bi bi-bell text-light fs-3"></i>
                     </a>
                 </li>
