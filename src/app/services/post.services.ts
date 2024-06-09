@@ -19,4 +19,9 @@ export class PostServices {
 
         return this.http.get<Post[]>(`http://localhost:3000/post?id_utilisateur=${idUser}`);
     }
+
+    getPostById(idPost: number): Observable<Post>{
+
+        return this.http.get<Post>(`http://localhost:3000/post/${idPost}`);
+    }
 }
