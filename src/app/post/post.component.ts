@@ -1,17 +1,22 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Post } from '../models/post.models';
 import { PostServices } from '../services/post.services';
-import { Router } from '@angular/router';
-import { DatePipe, NgIf } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
+import { DatePipe, LowerCasePipe, NgIf, TitleCasePipe, UpperCasePipe } from '@angular/common';
 import { UserService } from '../services/user.services';
 import { User } from '../models/user.models';
+import { Title } from 'chart.js';
 
 @Component({
   selector: 'app-post',
   standalone: true,
   imports: [
+    UpperCasePipe,
+    LowerCasePipe,
+    TitleCasePipe,
     DatePipe,
-    NgIf
+    NgIf,
+    RouterLink
   ],
   templateUrl: './post.component.html',
   styleUrl: './post.component.css'

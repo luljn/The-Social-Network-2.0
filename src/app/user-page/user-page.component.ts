@@ -26,6 +26,7 @@ export class UserPageComponent implements OnInit {
 
   user$!: Observable<User>;
   userPosts$!: Observable<Post[]>;
+  connectedUser!: User | null ; // Connected User.
 
   constructor(private userService: UserService,
               private postService: PostServices,
@@ -42,5 +43,6 @@ export class UserPageComponent implements OnInit {
     const userId = +this.route.snapshot.params['id'];
     this.user$ = this.userService.getUserById(userId);
     this.userPosts$ = this.postService.getPostsByUser(userId);
+    this.connectedUser = this.userService.getConnectedUser();
   }
 }

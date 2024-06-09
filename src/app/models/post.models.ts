@@ -6,4 +6,7 @@ export class Post {
     date_creation!: Date;
     image?: string;
     sensible!: boolean;
+    nom_utilisateur!: string;
+    prenom_utilisateur!: string;
+    likes!: number;
 }

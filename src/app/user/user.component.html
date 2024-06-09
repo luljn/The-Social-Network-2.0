@@ -3,8 +3,10 @@
     <div class="card-body">
       <a class="text-dark text-decoration-none" routerLink="/users/{{user.id}}"><h5 class="card-title fw-bold mb-4 mt-2 text-center">{{ user.prenom + " " + user.nom }}</h5></a>
       <p class="card-text mb-4 text-center">{{ user.description }}</p>
-      <div class="text-center">
-        <a routerLink="/profile/{{user.id}}" class="btn btn-primary">Mon profil</a>
-      </div>
+      @if(connectedUser?.id == user.id){ 
+        <div class="text-center">
+          <a routerLink="/profile/{{user.id}}" class="btn btn-primary">Mon profil</a>
+        </div>
+      }
     </div>
 </div>

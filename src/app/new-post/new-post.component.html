@@ -22,8 +22,8 @@
     <div class="row justify-content-center my-5">
         <div class="card col-10 col-sm-10 col-md-8 col-lg-4" *ngIf="postPreview$ | async as post">
             <div class="mb-3 d-flex flex-row justify-content-between">
-                <h2>{{ post.id_utilisateur }}</h2>
-                <h5>{{ post.date_creation | date: 'd MMMM yyyy' }}</h5>
+              <h5></h5>
+              <h5>{{ post.date_creation | date: 'd MMMM yyyy' }}</h5>
             </div>
             <hr class="">
             <img *ngIf="post.image" [src]="post.image" alt="">
