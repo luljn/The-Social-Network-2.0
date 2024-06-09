@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, map, switchMap } from "rxjs";
 import { User } from "../models/user.models";
 import { LocalStorageService } from "./localstorage.services";
+import * as CryptoJS from 'crypto-js';
 
 @Injectable({
     providedIn: 'root'
@@ -44,5 +45,24 @@ export class UserService {
     getUserByEmail(email: string): Observable<User>{
 
         return this.http.get<User>(`http://localhost:3000/utilisateur?email=${email}`);
+    }
+
+    addUser(formValue: {nom: string, prenom: string, email: string, adresse: string, mdp: string, date_de_naissance: Date}): Observable<User>{
+
+        return this.getAllUsers().pipe(
+            map(users => [...users].sort((a,b) => a.id - b.id)),
+            map(sortedUsers => sortedUsers[sortedUsers.length -1]),
+            map(previousUser => ({
+                ...formValue,
+                mdp: CryptoJS.MD5(formValue.mdp).toString(),  // To hash the password before insert it in the database.
+                admin: false,
+                statut_bannissement: false,
+                description: "Salut je suis un(e) utilisateur(trice) de TSN",
+                profile_photo: "./assets/users/profile.png",
+                id: +previousUser.id + 1,
+                followings: []
+            })),
+            switchMap(newUser => this.http.post<User>(`http://localhost:3000/utilisateur/`, newUser))
+        );
     }
 }

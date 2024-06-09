@@ -9,4 +9,5 @@ export class Post {
     nom_utilisateur!: string;
     prenom_utilisateur!: string;
     likes!: number;
+    comments!: any[];
 }

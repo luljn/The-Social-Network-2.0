@@ -11,31 +11,31 @@
           </p>
           <hr>
           <div class="col-6">
-            <label for="name" class="form-label"></label>
-            <input type="text" class="form-control" name="name" id="name" placeholder="Nom" formControlName="name">
+            <label for="nom" class="form-label"></label>
+            <input type="text" class="form-control" name="nom" id="nom" placeholder="Nom" formControlName="nom">
             </div>
             <div class="col-6">
-                <label for="surname" class="form-label"></label>
-                <input type="text" class="form-control" name="surname" id="surname" placeholder="Prénom" formControlName="surname">
+                <label for="prenom" class="form-label"></label>
+                <input type="text" class="form-control" name="prenom" id="prenom" placeholder="Prénom" formControlName="prenom">
             </div>
             <div class="col-12">
                 <label for="email" class="form-label"></label>
                 <input type="text" class="form-control" name="email" id="email" placeholder="Adresse mail" formControlName="email">
             </div>
             <div class="col-12">
-                <label for="address" class="form-label"></label>
-                <input type="text" class="form-control" name="address" id="address" placeholder="Adresse" formControlName="address">
+                <label for="adresse" class="form-label"></label>
+                <input type="text" class="form-control" name="adresse" id="address" placeholder="Adresse" formControlName="adresse">
             </div>
             <div class="col-12">
-                <label for="password" class="form-label"></label>
-                <input type="password" class="form-control" name="password" id="password" placeholder="Nouveau mot de passe" formControlName="password">
+                <label for="mdp" class="form-label"></label>
+                <input type="password" class="form-control" name="mdp" id="mdp" placeholder="Nouveau mot de passe" formControlName="mdp">
             </div>
             <div class="col-12 mt-4 mb-3">
-                <label for="birthdate" class="form-label text-secondary">Date de naissance</label>
-                <input type="date" class="form-control" name="birthdate" id="birthdate" formControlName="birthdate">
+                <label for="date_de_naissance" class="form-label text-secondary">Date de naissance</label>
+                <input type="date" class="form-control" name="date_de_naissance" id="date_de_naissance" formControlName="date_de_naissance">
             </div>
             <div class="col-12 my-3">
-                <button type="submit" class="btn btn-success w-100 fs-5 fw-bold" [disabled]="signupForm.invalid">S'inscrire</button>
+                <button type="submit" class="btn btn-success w-100 fs-5 fw-bold" [disabled]="signupForm.invalid" (click)="onSubmitForm()">S'inscrire</button>
             </div>
             <hr>
             <p class="text-center fs-6">
