@@ -43,4 +43,21 @@ export class SignupComponent implements OnInit {
       tap(() => this.router.navigateByUrl(""))
     ).subscribe();
   }
+
+  togglePassword(): void {
+    const passwordField = document.getElementById('mdp') as HTMLInputElement;
+    const togglePasswordBtn = document.getElementById('togglePassword');
+    
+    if (passwordField && togglePasswordBtn) {
+      const fieldType = passwordField.getAttribute('type');
+
+      if (fieldType === 'password') {
+        passwordField.setAttribute('type', 'text');
+        togglePasswordBtn.innerHTML = '<i class="bi bi-eye-slash"></i><span> Masquer le mot de passe</span>';
+      } else {
+        passwordField.setAttribute('type', 'password');
+        togglePasswordBtn.innerHTML = '<i class="bi bi-eye"></i><span> Afficher le mot de passe</span>';
+      }
+    }
+  }
 }

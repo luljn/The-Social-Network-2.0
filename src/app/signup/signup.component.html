@@ -30,6 +30,11 @@
                 <label for="mdp" class="form-label"></label>
                 <input type="password" class="form-control" name="mdp" id="mdp" placeholder="Nouveau mot de passe" formControlName="mdp">
             </div>
+            <div class="col-10">
+              <button class="btn btn-outline-secondary" type="button" id="togglePassword" (click)="togglePassword()">
+                  <i class="bi bi-eye"></i><span> Afficher le mot de passe</span>
+              </button>
+            </div>
             <div class="col-12 mt-4 mb-3">
                 <label for="date_de_naissance" class="form-label text-secondary">Date de naissance</label>
                 <input type="date" class="form-control" name="date_de_naissance" id="date_de_naissance" formControlName="date_de_naissance">
@@ -40,7 +45,7 @@
             <hr>
             <p class="text-center fs-6">
                 Vous avez déjà un compte ?
-                <a routerLink="" class="text-primary text-center">
+                <a routerLink="" class="text-primary text-center fw-bold">
                     Connectez-vous Ici
                 </a>
             </p>

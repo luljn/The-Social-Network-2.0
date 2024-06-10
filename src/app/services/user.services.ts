@@ -59,7 +59,7 @@ export class UserService {
                 statut_bannissement: false,
                 description: "Salut je suis un(e) utilisateur(trice) de TSN",
                 profile_photo: "./assets/users/profile.png",
-                id: +previousUser.id + 1,
+                id: (+previousUser.id + 1).toString(),
                 followings: []
             })),
             switchMap(newUser => this.http.post<User>(`http://localhost:3000/utilisateur/`, newUser))

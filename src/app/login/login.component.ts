@@ -51,4 +51,22 @@ export class LoginComponent implements OnInit {
       }
     });
   }
+
+  togglePassword(): void{
+    
+    const passwordField = document.getElementById('password') as HTMLInputElement;
+    const togglePasswordBtn = document.getElementById('togglePassword');
+    
+    if (passwordField && togglePasswordBtn) {
+      const fieldType = passwordField.getAttribute('type');
+
+      if (fieldType === 'password') {
+        passwordField.setAttribute('type', 'text');
+        togglePasswordBtn.innerHTML = '<i class="bi bi-eye-slash"></i><span> Masquer le mot de passe</span>';
+      } else {
+        passwordField.setAttribute('type', 'password');
+        togglePasswordBtn.innerHTML = '<i class="bi bi-eye"></i><span> Afficher le mot de passe</span>';
+      }
+    }
+  }
 }
