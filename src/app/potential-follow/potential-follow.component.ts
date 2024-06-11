@@ -4,13 +4,15 @@ import { User } from '../models/user.models';
 import { AsyncPipe, NgFor } from '@angular/common';
 import { LocalStorageService } from '../services/localstorage.services';
 import { UserService } from '../services/user.services';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-potential-follow',
   standalone: true,
   imports: [
     NgFor,
-    AsyncPipe
+    AsyncPipe,
+    RouterLink
   ],
   templateUrl: './potential-follow.component.html',
   styleUrl: './potential-follow.component.css'
@@ -20,7 +22,8 @@ export class PotentialFollowComponent implements OnInit {
   potentialFollows$!: Observable<User[]>;
 
   constructor(private localstorageService: LocalStorageService,
-              private userService: UserService
+              private userService: UserService,
+              private router: Router
   ){}
 
   ngOnInit(): void {
@@ -37,5 +40,11 @@ export class PotentialFollowComponent implements OnInit {
       const newuser = JSON.parse(connectedUser) as User;
       this.potentialFollows$ = this.userService.getAllUsersWithoutTheCurrent(newuser.id);
     }
+  }
+
+  onGetFollow(id: number): void{
+
+    this.router.navigateByUrl(`/users/${id}`);
+    // window.location.reload();
   }
 }
