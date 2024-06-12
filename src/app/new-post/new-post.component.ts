@@ -1,4 +1,4 @@
-import { AsyncPipe, CommonModule, DatePipe } from '@angular/common';
+import { AsyncPipe, CommonModule, DatePipe, TitleCasePipe, UpperCasePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -16,7 +16,9 @@ import { UserService } from '../services/user.services';
     ReactiveFormsModule,
     CommonModule,
     AsyncPipe,
-    DatePipe
+    DatePipe,
+    UpperCasePipe,
+    TitleCasePipe
   ],
   templateUrl: './new-post.component.html',
   styleUrl: './new-post.component.css'

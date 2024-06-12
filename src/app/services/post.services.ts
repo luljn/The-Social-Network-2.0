@@ -15,12 +15,16 @@ export class PostServices {
 
     getAllPosts(): Observable<Post[]>{
 
-        return this.http.get<Post[]>("http://localhost:3000/post");
+        return this.http.get<Post[]>("http://localhost:3000/post").pipe(
+            map((posts =>  [...posts].sort((a,b) => b.id - a.id)))
+        );
     }
 
     getPostsByUser(idUser: number): Observable<Post[]>{
 
-        return this.http.get<Post[]>(`http://localhost:3000/post?id_utilisateur=${idUser}`);
+        return this.http.get<Post[]>(`http://localhost:3000/post?id_utilisateur=${idUser}`).pipe(
+            map((posts =>  [...posts].sort((a,b) => b.id - a.id)))
+        );
     }
 
     getPostById(idPost: number): Observable<Post>{
