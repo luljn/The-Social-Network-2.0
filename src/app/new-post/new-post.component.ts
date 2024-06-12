@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { Post } from '../models/post.models';
 import { PostServices } from '../services/post.services';
 import { Router } from '@angular/router';
-import { map } from 'rxjs';
+import { map, tap } from 'rxjs';
 import { User } from '../models/user.models';
 import { UserService } from '../services/user.services';
 
@@ -52,9 +52,16 @@ export class NewPostComponent implements OnInit {
   
         ...formValue,
         date_creation: new Date(),
-        // nom_utilisateur: this.connectedUser.nom.toString(),
-        // prenom_utilisateur: this.connectedUser.prenom.toString()
+        nom_utilisateur: this.userService.getConnectedUser()?.nom,
+        prenom_utilisateur: this.userService.getConnectedUser()?.prenom
       }))
     );
+  }
+
+  onSubmitForm(): void{
+
+    this.postService.addPost(this.postForm.value).pipe(
+      tap(() => this.router.navigateByUrl(`/users/${this.userService.getConnectedUser()?.id}`))
+    ).subscribe();
   }
 }

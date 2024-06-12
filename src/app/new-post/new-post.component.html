@@ -15,7 +15,7 @@
             <label for="image" class="form-label">Voulez-vous ajouter une image ?</label>
             <input type="file" class="form-control" id="image" name="image" formControlName="image" accept="image/*">
           </div>
-          <button type="submit" class="btn btn-success w-100 fs-5 fw-bold" [disabled]="postForm.invalid">Enregistrer</button>
+          <button type="submit" class="btn btn-success w-100 fs-5 fw-bold" (click)="onSubmitForm()" [disabled]="postForm.invalid">Enregistrer</button>
         </form>
       </div>
     </div>
