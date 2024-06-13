@@ -52,4 +52,15 @@ export class PostServices {
             switchMap(newPost => this.http.post<Post>(`http://localhost:3000/post/`, newPost))
         );
     }
+
+    likeOrUnlikePost(idPost: number, actionType: 'like' | 'unlike'): Observable<Post>{
+
+        return this.getPostById(idPost).pipe(
+            map(post =>({
+                ...post,
+                likes: post.likes + (actionType === 'like' ? 1 : -1)
+            })),
+            switchMap(updatedPost => this.http.put<Post>(`http://localhost:3000/post/${idPost}`, updatedPost))
+        );
+    }
 }

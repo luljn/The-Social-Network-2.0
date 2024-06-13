@@ -16,14 +16,13 @@
                     <p>{{ post.contenu }}</p>
                     <hr class="">
                     <div *ngIf="connectedUser" class="d-flex flex-row mx-2 mb-2">
-                        <button type="button" class="btn btn-unstyled">
+                        <button type="button" class="btn btn-unstyled" (click)="onAddOrRemoveLike(post.id)">
                             <i class="bi bi-hand-thumbs-up fs-3 text-primary mx-2" data-bs-toggle="tooltip" title="Like"></i>
                         </button><p class="fs-3 me-4 text-secondary">{{ post.likes }}</p>
                         <button type="button" class="btn btn-unstyled" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom<?= $post->getID() ?>" aria-controls="offcanvasBottom">
                             <i class="bi bi-chat fs-3 text-primary mx-2" data-bs-toggle="tooltip" title="Commenter"></i>
                         </button><p class="fs-3 me-4 text-secondary">{{ post.comments.length }}</p>
                     </div>
-                    <!-- <button class="btn btn-primary">Retour</button> -->
                 </div>
             </div>
 

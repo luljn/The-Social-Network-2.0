@@ -5,7 +5,7 @@ import { PostServices } from '../services/post.services';
 import { UserService } from '../services/user.services';
 import { User } from '../models/user.models';
 import { AsyncPipe, DatePipe, LowerCasePipe, NgIf, TitleCasePipe, UpperCasePipe } from '@angular/common';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'app-single-post',
@@ -25,6 +25,7 @@ export class SinglePostComponent implements OnInit{
 
   post$!: Observable<Post>;
   connectedUser!: User | null;  // This variable is used to determine if the user is connected or not.
+  liked!: boolean;
 
   constructor(private postService: PostServices,
               private router: Router,
@@ -32,6 +33,8 @@ export class SinglePostComponent implements OnInit{
               private route: ActivatedRoute){}
 
   ngOnInit(): void {
+
+    this.liked = false;
       
     const postId = +this.route.snapshot.params['id'];
     this.post$ = this.postService.getPostById(postId);
@@ -41,5 +44,24 @@ export class SinglePostComponent implements OnInit{
     }
   }
 
-  
+  onAddOrRemoveLike(idPost: number): void{
+
+    if(this.liked == false){
+
+      this.post$ = this.postService.likeOrUnlikePost(idPost, 'like').pipe(
+        tap(() => {
+          this.liked = true;
+        })
+      );
+    }
+
+    else {
+
+      this.post$ = this.postService.likeOrUnlikePost(idPost, 'unlike').pipe(
+        tap(() => {
+          this.liked = false;
+        })
+      );
+    }
+  }
 }
