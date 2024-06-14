@@ -10,6 +10,7 @@ import { NewPostComponent } from './new-post/new-post.component';
 import { AdminComponent } from './admin/admin.component';
 import { AboutComponent } from './about/about.component';
 import { SearchResultComponent } from './search-result/search-result.component';
+import { SinglePostComponent } from './single-post/single-post.component';
 
 export const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -22,5 +23,6 @@ export const routes: Routes = [
     { path: 'admin', component: AdminComponent},
     { path: 'about', component: AboutComponent},
     { path: 'users/:id', component: UserPageComponent },
+    { path: 'posts/:id', component: SinglePostComponent },
     { path: 'profile/:id', component: ProfileComponent}
 ];

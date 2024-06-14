@@ -1,11 +1,13 @@
 <section class="mt-5">
 
-    <div class="container mt-5 d-flex flex-row">
+    <div class="container mt-5">
 
         <div class="row">
 
-            <div class="col-6 col-sm-6 col-md-3 col-lg-2 mt-5">
-                <h5 class="text-center fs-5 fw-bold text-secondary mb-4 position-sticky" style="top: 97px">Vous</h5>
+            <div *ngIf="user$ | async as user" class="col-6 col-sm-6 col-md-3 col-lg-2 mt-5">
+                @if(connectedUser?.id == user.id){
+                    <h5 class="text-center fs-5 fw-bold text-secondary mb-4 position-sticky" style="top: 97px">Vous</h5>
+                }
                 <app-user *ngIf="user$ | async as user" [user]="user"></app-user>
             </div>
             

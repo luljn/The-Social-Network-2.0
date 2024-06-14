@@ -15,15 +15,15 @@
             <label for="image" class="form-label">Voulez-vous ajouter une image ?</label>
             <input type="file" class="form-control" id="image" name="image" formControlName="image" accept="image/*">
           </div>
-          <button type="submit" class="btn btn-success w-100 fs-5 fw-bold" [disabled]="postForm.invalid">Enregistrer</button>
+          <button type="submit" class="btn btn-success w-100 fs-5 fw-bold" (click)="onSubmitForm()" [disabled]="postForm.invalid">Enregistrer</button>
         </form>
       </div>
     </div>
     <div class="row justify-content-center my-5">
         <div class="card col-10 col-sm-10 col-md-8 col-lg-4" *ngIf="postPreview$ | async as post">
             <div class="mb-3 d-flex flex-row justify-content-between">
-                <h2>{{ post.id_utilisateur }}</h2>
-                <h5>{{ post.date_creation | date: 'd MMMM yyyy' }}</h5>
+              <h5 class="fw-bold">{{ post.prenom_utilisateur | titlecase}} {{ post.nom_utilisateur | uppercase }}</h5>
+              <h5>{{ post.date_creation | date: 'd MMMM yyyy' }}</h5>
             </div>
             <hr class="">
             <img *ngIf="post.image" [src]="post.image" alt="">

@@ -37,10 +37,10 @@ export class AuthService {
         const hashPassword = CryptoJS.MD5(formValue.password).toString();
 
         return this.http.get<User[]>(`http://localhost:3000/utilisateur?email=${formValue.email}&mdp=${hashPassword}`).pipe(
-            map(users => {
-            if (users.length > 0) {
+            map(user => {
+            if (user.length > 0) {
                 this.loggedIn = true;
-                this.localstorageService.setItem('connectedUser', JSON.stringify(users[0]));
+                this.localstorageService.setItem('connectedUser', JSON.stringify(user[0]));
                 return true;
             } else {
                 return false;

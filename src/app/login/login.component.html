@@ -10,9 +10,14 @@
             <label for="email" class="form-label"></label>
             <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp" placeholder="Adresse mail">
           </div>
-          <div class="mb-5">
+          <div class="mb-2">
             <label for="password" class="form-label"></label>
             <input type="password" class="form-control" id="password" formControlName="password" placeholder="Mot de passe">
+          </div>
+          <div class="col-10 mb-5">
+            <button class="btn btn-outline-secondary" type="button" id="togglePassword" (click)="togglePassword()">
+                <i class="bi bi-eye"></i><span> Afficher le mot de passe</span>
+            </button>
           </div>
           <button type="submit" class="btn btn-primary w-100 fs-5 fw-bold" (click)="onConnectUser()" [disabled]="loginForm.invalid">Se connecter</button>
           <hr>
