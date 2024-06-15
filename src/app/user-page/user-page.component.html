@@ -6,7 +6,7 @@
 
             <div *ngIf="user$ | async as user" class="col-6 col-sm-6 col-md-3 col-lg-2 mt-5">
                 @if(connectedUser?.id == user.id){
-                    <h5 class="text-center fs-5 fw-bold text-secondary mb-4 position-sticky" style="top: 97px">Vous</h5>
+                    <h5 class="text-center fs-5 fw-bold text-secondary mb-4 position-sticky top">Vous</h5>
                 }
                 <app-user *ngIf="user$ | async as user" [user]="user"></app-user>
             </div>
@@ -16,9 +16,15 @@
                 </app-post>
             </div>
 
-            <!-- <div *ngIf="user" class="col-12 col-sm-12 col-md-3 col-lg-2 my-5">
-                <app-potential-follow></app-potential-follow>
-            </div> -->
+            <div *ngIf="user$ | async as user" class="col-12 col-sm-12 col-md-3 col-lg-2 my-5">
+                @if(connectedUser?.id == user.id){
+                    <h5 class="text-center fs-5 fw-bold text-secondary mb-4 position-sticky top">Vos follows</h5>
+                }
+                @else {
+                    <h5 class="text-center fs-5 fw-bold text-secondary mb-4 position-sticky top">Follows</h5>
+                }
+                <app-user-followings></app-user-followings>
+            </div>
 
         </div>    
 

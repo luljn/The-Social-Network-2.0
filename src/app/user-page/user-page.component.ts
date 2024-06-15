@@ -8,6 +8,7 @@ import { PostServices } from '../services/post.services';
 import { ActivatedRoute } from '@angular/router';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { PostComponent } from '../post/post.component';
+import { UserFollowingsComponent } from '../user-followings/user-followings.component';
 
 @Component({
   selector: 'app-user-page',
@@ -15,6 +16,7 @@ import { PostComponent } from '../post/post.component';
   imports: [
     UserComponent,
     PostComponent,
+    UserFollowingsComponent,
     NgIf,
     NgFor,
     AsyncPipe
