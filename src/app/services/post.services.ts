@@ -63,4 +63,10 @@ export class PostServices {
             switchMap(updatedPost => this.http.put<Post>(`http://localhost:3000/post/${idPost}`, updatedPost))
         );
     }
+
+    updateNumberOfLikes(numberOflikes: number, idPost: number): void{
+
+        const body = {likes: numberOflikes};
+        this.http.patch(`http://localhost:3000/post/${idPost}`, body).subscribe();
+    }
 }

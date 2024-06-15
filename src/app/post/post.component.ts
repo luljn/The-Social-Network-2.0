@@ -5,7 +5,6 @@ import { Router, RouterLink } from '@angular/router';
 import { CommonModule, DatePipe, LowerCasePipe, NgFor, NgIf, TitleCasePipe, UpperCasePipe } from '@angular/common';
 import { UserService } from '../services/user.services';
 import { User } from '../models/user.models';
-import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-post',
@@ -47,13 +46,15 @@ export class PostComponent implements OnInit {
 
     if(this.liked == false){
 
-      this.postService.likeOrUnlikePost(idPost, 'like');
+      const newLikes = this.post.likes += 1;
+      this.postService.updateNumberOfLikes(newLikes, this.post.id);
       this.liked = true;
     }
 
     else {
 
-      this.postService.likeOrUnlikePost(idPost, 'unlike');
+      const newLikes = this.post.likes -= 1;
+      this.postService.updateNumberOfLikes(newLikes, this.post.id);
       this.liked = false;
     }
   }
