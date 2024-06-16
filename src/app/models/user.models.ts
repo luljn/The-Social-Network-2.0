@@ -11,4 +11,5 @@ export class User {
     statut_bannissement!: boolean;
     profile_photo!: string;
     description!: string;
+    followings!: [];
 }

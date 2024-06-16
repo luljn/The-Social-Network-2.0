@@ -47,14 +47,14 @@ export class PostComponent implements OnInit {
     if(this.liked == false){
 
       const newLikes = this.post.likes += 1;
-      this.postService.updateNumberOfLikes(newLikes, this.post.id);
+      this.postService.updateNumberOfLikes(newLikes, idPost);
       this.liked = true;
     }
 
     else {
 
       const newLikes = this.post.likes -= 1;
-      this.postService.updateNumberOfLikes(newLikes, this.post.id);
+      this.postService.updateNumberOfLikes(newLikes, idPost);
       this.liked = false;
     }
   }
