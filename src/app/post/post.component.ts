@@ -5,6 +5,10 @@ import { Router, RouterLink } from '@angular/router';
 import { CommonModule, DatePipe, LowerCasePipe, NgFor, NgIf, TitleCasePipe, UpperCasePipe } from '@angular/common';
 import { UserService } from '../services/user.services';
 import { User } from '../models/user.models';
+import { Observable } from 'rxjs';
+import { Comment } from '../models/comment.models';
+import { CommentService } from '../services/comment.services';
+import { CommentComponent } from '../comment/comment.component';
 
 @Component({
   selector: 'app-post',
@@ -17,7 +21,8 @@ import { User } from '../models/user.models';
     DatePipe,
     NgIf,
     NgFor,
-    RouterLink
+    RouterLink,
+    CommentComponent
   ],
   templateUrl: './post.component.html',
   styleUrl: './post.component.css'
@@ -25,17 +30,19 @@ import { User } from '../models/user.models';
 export class PostComponent implements OnInit {
 
   @Input() post!: Post;
+  comments$!: Observable<Comment[]>;
   connectedUser!: User | null;  // This variable is used to determine if the user is connected or not.
   liked!: boolean;
 
   constructor(private postService: PostServices,
+              private commentService: CommentService,
               private router: Router,
               private userService: UserService){}
 
   ngOnInit(): void {
       
     this.liked = false;
-
+    this.comments$ = this.commentService.getCommentsByPost(this.post.id);
     if(this.userService.getConnectedUser() !== null){
 
       this.connectedUser = this.userService.getConnectedUser();

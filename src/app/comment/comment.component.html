@@ -1,0 +1,9 @@
+<div class="card">
+    <div class="my-3 d-flex flex-row justify-content-between">
+        <a class="text-dark text-decoration-none" routerLink="/users/{{comment.id_utilisateur}}"><h5 class="fw-bold">{{ comment.prenom_utilisateur| titlecase}} {{ comment.nom_utilisateur| uppercase }}</h5></a>
+        <h5>{{ comment.date_creation| date: 'd MMMM yyyy' }}</h5>
+    </div>
+    <hr class="">
+    <p>{{ comment.contenu }}</p>
+    <hr class="">
+</div>

@@ -34,23 +34,15 @@
                           <textarea class="form-control" id="contenu" formControlName="contenu" aria-describedby="nouveauPost" cols="50" rows="10">
                           </textarea>
                         </div>
-                        <!-- <div class="mb-5">
+                        <div class="mb-5">
                           <label for="image" class="form-label">Voulez-vous ajouter une image ?</label>
                           <input type="file" class="form-control" id="image" name="image" formControlName="image" accept="image/*">
-                        </div> -->
+                        </div>
                         <button type="submit" class="btn btn-success w-100 fs-5 fw-bold">Enregistrer</button>
                     </form>
                 </div>
-                <div *ngFor="let commentaire of post.comments" class="col-6">
-                    <div class="card">
-                        <div class="my-3 d-flex flex-row justify-content-between">
-                            <a class="text-dark text-decoration-none" routerLink=``><h5 class="fw-bold">{{ commentaire["prenom_utilisateur"] | titlecase}} {{ commentaire["nom_utilisateur"] | uppercase }}</h5></a>
-                            <h5>{{ commentaire["date_creation"] | date: 'd MMMM yyyy' }}</h5>
-                        </div>
-                        <hr class="">
-                        <p>{{ commentaire["contenu"] }}</p>
-                        <hr class="">
-                    </div>
+                <div class="col-6">
+                    <app-comment *ngFor="let commentaire of comments$ | async" [comment]="commentaire"></app-comment>
                 </div>
             </div>
         </div>
