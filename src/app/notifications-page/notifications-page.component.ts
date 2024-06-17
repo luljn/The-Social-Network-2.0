@@ -19,11 +19,15 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 export class NotificationsPageComponent implements OnInit {
 
   notifications$!: Observable<Notification[]>;
+  isNotificationEmpty!: boolean;
 
   constructor(private notificationService: NotificationService){}
 
   ngOnInit(): void {
       
     this.notifications$ = this.notificationService.getNotificationsByUser();
+    this.notificationService.checkIfNotificationsEmpty().subscribe(
+      isEmpty => {this.isNotificationEmpty = isEmpty}
+    );
   }
 }

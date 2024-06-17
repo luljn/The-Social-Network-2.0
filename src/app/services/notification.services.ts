@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { User } from "../models/user.models";
 import { UserService } from "./user.services";
-import { Observable } from "rxjs";
+import { Observable, switchMap, of } from "rxjs";
 import { Notification } from "../models/notification.models";
 
 @Injectable({
@@ -20,5 +20,12 @@ export class NotificationService {
 
         this.user = this.userService.getConnectedUser();
         return this.http.get<Notification[]>(`http://localhost:3000/notification?id_utilisateur=${this.user?.id}`)
+    }
+
+    checkIfNotificationsEmpty(): Observable<boolean>{
+
+        return this.getNotificationsByUser().pipe(
+            switchMap(notifications => of(notifications.length === 0))
+        );
     }
 }
