@@ -13,7 +13,9 @@ export class CommentService {
 
     getCommentsByPost(idPost: number): Observable<Comment[]>{
 
-        return this.http.get<Comment[]>(`http://localhost:3000/commentaire?id_post=${idPost}`);
+        return this.http.get<Comment[]>(`http://localhost:3000/commentaire?id_post=${idPost}`).pipe(
+            map((comments =>  [...comments].sort((a,b) => b.id - a.id)))
+        );
     }
 
     getCommentsCount(idPost: number): Observable<number>{
