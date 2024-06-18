@@ -6,6 +6,9 @@ import { UserService } from '../services/user.services';
 import { User } from '../models/user.models';
 import { AsyncPipe, DatePipe, LowerCasePipe, NgIf, TitleCasePipe, UpperCasePipe } from '@angular/common';
 import { Observable, tap } from 'rxjs';
+import { Comment } from '../models/comment.models';
+import { CommentService } from '../services/comment.services';
+import { CommentComponent } from '../comment/comment.component';
 
 @Component({
   selector: 'app-single-post',
@@ -16,7 +19,8 @@ import { Observable, tap } from 'rxjs';
     UpperCasePipe,
     TitleCasePipe,
     AsyncPipe,
-    NgIf
+    NgIf,
+    CommentComponent
   ],
   templateUrl: './single-post.component.html',
   styleUrl: './single-post.component.css'
@@ -24,10 +28,12 @@ import { Observable, tap } from 'rxjs';
 export class SinglePostComponent implements OnInit{
 
   post$!: Observable<Post>;
+  commentsNumber!: number;
   connectedUser!: User | null;  // This variable is used to determine if the user is connected or not.
   liked!: boolean;
 
   constructor(private postService: PostServices,
+              private commentService: CommentService,
               private router: Router,
               private userService: UserService,
               private route: ActivatedRoute){}
@@ -38,6 +44,9 @@ export class SinglePostComponent implements OnInit{
       
     const postId = +this.route.snapshot.params['id'];
     this.post$ = this.postService.getPostById(postId);
+    this.commentService.getCommentsCount(postId).subscribe(
+      numberOfComments => { this.commentsNumber = numberOfComments; }
+    );
     if(this.userService.getConnectedUser() !== null){
 
       this.connectedUser = this.userService.getConnectedUser();
@@ -63,5 +72,11 @@ export class SinglePostComponent implements OnInit{
         })
       );
     }
+  }
+
+  onViewCommentPage(){
+
+    const postId = +this.route.snapshot.params['id'];
+    this.router.navigateByUrl(`posts/comments/${postId}`);
   }
 }

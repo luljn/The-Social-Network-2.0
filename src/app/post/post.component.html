@@ -10,41 +10,9 @@
         <button type="button" class="btn btn-unstyled" (click)="onAddOrRemoveLike(post.id)">
             <i class="bi bi-hand-thumbs-up fs-3 text-primary mx-2" data-bs-toggle="tooltip" title="Like"></i>
         </button><p class="fs-3 me-4 text-secondary">{{ post.likes }}</p>
-        <button type="button" class="btn btn-unstyled" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+        <button type="button" class="btn btn-unstyled" (click)="onViewCommentPage()">
             <i class="bi bi-chat fs-3 text-primary mx-2" data-bs-toggle="tooltip" title="Commenter"></i>
-        </button><p class="fs-3 me-4 text-secondary">{{ post.comments.length }}</p>
+        </button><p class="fs-3 me-4 text-secondary">{{ commentsNumber }}</p>
     </div>
     <button class="btn btn-primary mx-5 my-3" (click)="onViewSinglePost()">Voir plus</button>
-</div>
-
-<!-- Offcanvas to display the comments of a post -->
-<div class="offcanvas offcanvas-bottom h-100" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
-    <div class="offcanvas-header text-center">
-        <h5 class="offcanvas-title fs-3" id="offcanvasBottomLabel"></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body small">
-        <div class="container">
-            <div class="row gx-5">
-                <div class="col-6">
-                    <form class="border p-4 shadow rounded text-bg-light">
-                        <h2 class="text-center mb-4 fs-5"></h2>
-                        <div class="mb-5">
-                          <label for="contenu" class="form-label">Contenu de votre commentaire</label>
-                          <textarea class="form-control" id="contenu" formControlName="contenu" aria-describedby="nouveauPost" cols="50" rows="10">
-                          </textarea>
-                        </div>
-                        <div class="mb-5">
-                          <label for="image" class="form-label">Voulez-vous ajouter une image ?</label>
-                          <input type="file" class="form-control" id="image" name="image" formControlName="image" accept="image/*">
-                        </div>
-                        <button type="submit" class="btn btn-success w-100 fs-5 fw-bold">Enregistrer</button>
-                    </form>
-                </div>
-                <div class="col-6">
-                    <app-comment *ngFor="let commentaire of comments$ | async" [comment]="commentaire"></app-comment>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>

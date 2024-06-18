@@ -11,6 +11,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AboutComponent } from './about/about.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { SinglePostComponent } from './single-post/single-post.component';
+import { CommentPageComponent } from './comment-page/comment-page.component';
 
 export const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -24,5 +25,6 @@ export const routes: Routes = [
     { path: 'about', component: AboutComponent},
     { path: 'users/:id', component: UserPageComponent },
     { path: 'posts/:id', component: SinglePostComponent },
+    { path: 'posts/comments/:id', component: CommentPageComponent},
     { path: 'profile/:id', component: ProfileComponent}
 ];

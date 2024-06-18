@@ -30,7 +30,7 @@ import { CommentComponent } from '../comment/comment.component';
 export class PostComponent implements OnInit {
 
   @Input() post!: Post;
-  comments$!: Observable<Comment[]>;
+  commentsNumber!: number;
   connectedUser!: User | null;  // This variable is used to determine if the user is connected or not.
   liked!: boolean;
 
@@ -42,7 +42,9 @@ export class PostComponent implements OnInit {
   ngOnInit(): void {
       
     this.liked = false;
-    this.comments$ = this.commentService.getCommentsByPost(this.post.id);
+    this.commentService.getCommentsCount(this.post.id).subscribe(
+      numberOfComments => { this.commentsNumber = numberOfComments; }
+    );
     if(this.userService.getConnectedUser() !== null){
 
       this.connectedUser = this.userService.getConnectedUser();
@@ -69,5 +71,10 @@ export class PostComponent implements OnInit {
   onViewSinglePost(){
 
     this.router.navigateByUrl(`posts/${this.post.id}`);
+  }
+
+  onViewCommentPage(){
+
+    this.router.navigateByUrl(`posts/comments/${this.post.id}`);
   }
 }
