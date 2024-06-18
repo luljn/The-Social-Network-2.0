@@ -1,8 +1,8 @@
 <div class="card">
     <div class="my-3 d-flex flex-row justify-content-between">
-        <button class="btn"  (click)="onDeleteNotification(notification.id)">
+        <a class="btn"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
             <i class="bi bi-trash3 text-primary fs-3"></i>
-        </button>
+        </a>
         <h5>{{ notification.date_creation | date: 'd MMMM yyyy' }}</h5>
     </div>
     <hr class="">
