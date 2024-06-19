@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Post } from '../models/post.models';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink, NavigationEnd } from '@angular/router';
 import { PostServices } from '../services/post.services';
 import { UserService } from '../services/user.services';
 import { User } from '../models/user.models';
 import { AsyncPipe, DatePipe, LowerCasePipe, NgIf, TitleCasePipe, UpperCasePipe } from '@angular/common';
-import { Observable, tap } from 'rxjs';
+import { Observable, tap, filter } from 'rxjs';
 import { Comment } from '../models/comment.models';
 import { CommentService } from '../services/comment.services';
 import { CommentComponent } from '../comment/comment.component';
@@ -76,6 +76,14 @@ export class SinglePostComponent implements OnInit{
 
   onViewCommentPage(){
 
+    const navigationSubscription = this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      // Unsubscribe to prevent multiple triggers
+      navigationSubscription.unsubscribe();
+      // Reload the window after navigation is complete
+      window.location.reload();
+    });
     const postId = +this.route.snapshot.params['id'];
     this.router.navigateByUrl(`posts/comments/${postId}`);
   }

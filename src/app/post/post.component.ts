@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Post } from '../models/post.models';
 import { PostServices } from '../services/post.services';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, NavigationEnd } from '@angular/router';
 import { CommonModule, DatePipe, LowerCasePipe, NgFor, NgIf, TitleCasePipe, UpperCasePipe } from '@angular/common';
 import { UserService } from '../services/user.services';
 import { User } from '../models/user.models';
-import { Observable } from 'rxjs';
+import { Observable, filter } from 'rxjs';
 import { Comment } from '../models/comment.models';
 import { CommentService } from '../services/comment.services';
 import { CommentComponent } from '../comment/comment.component';
@@ -75,6 +75,14 @@ export class PostComponent implements OnInit {
 
   onViewCommentPage(){
 
+    const navigationSubscription = this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      // Unsubscribe to prevent multiple triggers
+      navigationSubscription.unsubscribe();
+      // Reload the window after navigation is complete
+      window.location.reload();
+    });
     this.router.navigateByUrl(`posts/comments/${this.post.id}`);
   }
 }

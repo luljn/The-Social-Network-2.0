@@ -1,7 +1,7 @@
 <div class="container my-5">
     <div class="row gx-5 my-5">
         <div class="col-12 col-sm-12 col-lg-6 my-5">
-            <form class="border p-4 shadow rounded text-bg-light position-sticky top">
+            <form [formGroup]="commentForm" class="border p-4 shadow rounded text-bg-light position-sticky top">
                 <h2 class="text-center mb-4 fs-5"></h2>
                 <div class="mb-5">
                   <label for="contenu" class="form-label">Contenu de votre commentaire</label>
@@ -12,7 +12,7 @@
                   <label for="image" class="form-label">Voulez-vous ajouter une image ?</label>
                   <input type="file" class="form-control" id="image" name="image" formControlName="image" accept="image/*">
                 </div>
-                <button type="submit" class="btn btn-success w-100 fs-5 fw-bold">Enregistrer</button>
+                <button type="submit" class="btn btn-success w-100 fs-5 fw-bold" [disabled]="commentForm.invalid">Enregistrer</button>
             </form>
             <div class="w-50">
                 <button class="btn btn-primary fs-5 fw-bold my-5 position-fixed" (click)="onGetPostComponent()">Retour au post</button>

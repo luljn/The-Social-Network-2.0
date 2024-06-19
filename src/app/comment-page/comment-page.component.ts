@@ -5,13 +5,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { CommentComponent } from '../comment/comment.component';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-comment-page',
   standalone: true,
   imports: [
     CommonModule,
-    CommentComponent
+    CommentComponent,
+    ReactiveFormsModule
   ],
   templateUrl: './comment-page.component.html',
   styleUrl: './comment-page.component.css'
@@ -19,16 +21,21 @@ import { CommentComponent } from '../comment/comment.component';
 export class CommentPageComponent implements OnInit {
 
   comments$!: Observable<Comment[]>;
+  commentForm!: FormGroup;
 
   constructor(private commentService: CommentService,
               private route: ActivatedRoute,
-              private router: Router
+              private router: Router,
+              private formBuilder: FormBuilder
   ){}
 
   ngOnInit(): void {
       
     const postId = +this.route.snapshot.params['id'];
     this.comments$ = this.commentService.getCommentsByPost(postId);
+    this.commentForm = this.formBuilder.group({
+      contenu: [null, Validators.required]
+    });
   }
 
   onGetPostComponent(){
