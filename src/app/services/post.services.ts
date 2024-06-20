@@ -46,8 +46,7 @@ export class PostServices {
                 sensible: false,
                 nom_utilisateur: this.userService.getConnectedUser()?.nom,
                 prenom_utilisateur: this.userService.getConnectedUser()?.prenom,
-                likes: 0,
-                comments: []
+                likes: 0
             })),
             switchMap(newPost => this.http.post<Post>(`http://localhost:3000/post/`, newPost))
         );

@@ -12,7 +12,7 @@
                   <label for="image" class="form-label">Voulez-vous ajouter une image ?</label>
                   <input type="file" class="form-control" id="image" name="image" formControlName="image" accept="image/*">
                 </div>
-                <button type="submit" class="btn btn-success w-100 fs-5 fw-bold" [disabled]="commentForm.invalid">Enregistrer</button>
+                <button type="submit" class="btn btn-success w-100 fs-5 fw-bold" (click)="onSubmitForm()" [disabled]="commentForm.invalid">Enregistrer</button>
             </form>
             <div class="w-50">
                 <button class="btn btn-primary fs-5 fw-bold my-5 position-fixed" (click)="onGetPostComponent()">Retour au post</button>
