@@ -68,4 +68,9 @@ export class PostServices {
         const body = {likes: numberOflikes};
         this.http.patch(`http://localhost:3000/post/${idPost}`, body).subscribe();
     }
+
+    deletePost(idPost: number): Observable<void>{
+
+        return this.http.delete<void>(`http://localhost:3000/post/${idPost}`);
+    }
 }

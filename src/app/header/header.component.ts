@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, NavigationEnd } from '@angular/router';
 import { User } from '../models/user.models';
 import { UserService } from '../services/user.services';
 import { NgIf } from '@angular/common';
 import { AuthService } from '../services/auth.services';
 import { LocalStorageService } from '../services/localstorage.services';
-import { Subscription } from 'rxjs';
+import { Subscription, filter } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -62,6 +62,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onGetUserPersonnalPage(): void{
 
+    const navigationSubscription = this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      // Unsubscribe to prevent multiple triggers
+      navigationSubscription.unsubscribe();
+      // Reload the window after navigation is complete
+      window.location.reload();
+    });
     const userId = this.user?.id;
     this.router.navigateByUrl(`/users/${userId}`);
   }
