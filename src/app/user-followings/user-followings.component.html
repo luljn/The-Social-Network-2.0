@@ -1,39 +1,30 @@
-<!-- <div class="text-center position-sticky top">user-followings works!</div> -->
-<div *ngIf="user$ | async as user" id="carouselExampleCaptions" class="carousel slide text-center position-sticky top">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div>
-    <div class="carousel-inner">
-      <div *ngFor="let follow of user.followings" class="carousel-item active">
-        <img src="https://picsum.photos/id/272/1920/1280" class="d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <!-- <h5>First slide label</h5>
-          <p>Some representative placeholder content for the first slide.</p> -->
-        </div>
+<div class="text-center position-sticky top1">
+  <button type="button" class="btn btn-primary btn-block justify-content-center mt-3" data-bs-toggle="modal" data-bs-target="#usersNotFollowed">
+    <i class="bi bi-person-lines-fill"></i>
+    <!-- Voir -->
+  </button>
+</div>
+
+
+<div class="modal fade" id="usersNotFollowed" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">Follows</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+                      
+          <div *ngIf="user$ | async as user" class="modal-body">
+              <div class="mb-3 d-flex flex-row justify-content-between" *ngFor="let follow of user.followings">
+                  <img [src]="follow['profile_photo']" width="50" height="50">
+                  <a class="text-dark text-decoration-none btn"><h5 class="fs-5 fw-bold">{{ follow['prenom'] + " " + follow['nom'] }}</h5></a>
+                  <button type="button" class="btn btn-primary">UnFollow</button>
+              </div>
+          </div>
+                      
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+          </div>
       </div>
-      <div class="carousel-item">
-        <img src="https://picsum.photos/id/272/1920/1240" class="d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Second slide label</h5>
-          <p>Some representative placeholder content for the second slide.</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="https://picsum.photos/id/272/1920/1288" class="d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <h5>Third slide label</h5>
-          <p>Some representative placeholder content for the third slide.</p>
-        </div>
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
+  </div>
 </div>
