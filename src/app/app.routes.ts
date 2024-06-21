@@ -12,19 +12,20 @@ import { AboutComponent } from './about/about.component';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { SinglePostComponent } from './single-post/single-post.component';
 import { CommentPageComponent } from './comment-page/comment-page.component';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     { path: '', component: LoginComponent },
     { path: 'signup', component: SignupComponent },
-    { path: 'home', component: HomeComponent },
-    { path: 'notifications', component: NotificationsPageComponent},
-    { path: 'statistics', component: StatistiquesComponent},
-    { path: 'new-post', component: NewPostComponent },
+    { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
+    { path: 'notifications', component: NotificationsPageComponent, canActivate: [AuthGuard]},
+    { path: 'statistics', component: StatistiquesComponent, canActivate: [AuthGuard]},
+    { path: 'new-post', component: NewPostComponent, canActivate: [AuthGuard]},
     { path: 'search', component: SearchResultComponent},
-    { path: 'admin', component: AdminComponent},
+    { path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
     { path: 'about', component: AboutComponent},
-    { path: 'users/:id', component: UserPageComponent },
-    { path: 'posts/:id', component: SinglePostComponent },
-    { path: 'posts/comments/:id', component: CommentPageComponent},
-    { path: 'profile/:id', component: ProfileComponent}
+    { path: 'users/:id', component: UserPageComponent},
+    { path: 'posts/:id', component: SinglePostComponent},
+    { path: 'posts/comments/:id', component: CommentPageComponent, canActivate: [AuthGuard]},
+    { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuard]}
 ];

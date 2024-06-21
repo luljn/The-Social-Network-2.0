@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user.models';
 import { UserService } from '../services/user.services';
-import { Observable } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { Observable, filter } from 'rxjs';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { AsyncPipe, CommonModule } from '@angular/common';
 
 @Component({
@@ -20,7 +20,8 @@ export class UserFollowingsComponent implements OnInit {
   user$!: Observable<User>;
 
   constructor(private userService : UserService,
-              private route: ActivatedRoute
+              private route: ActivatedRoute,
+              private router: Router
   ){}
 
   ngOnInit(): void {
@@ -32,5 +33,20 @@ export class UserFollowingsComponent implements OnInit {
 
     const userId = +this.route.snapshot.params['id'];
     this.user$ = this.userService.getUserById(userId);
+  }
+
+  onGetFollow(id: number): void{
+
+    const navigationSubscription = this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      // Unsubscribe to prevent multiple triggers
+      navigationSubscription.unsubscribe();
+      // Reload the window after navigation is complete
+      window.location.reload();
+    });
+  
+    // Navigate to the desired URL
+    this.router.navigateByUrl(`/users/${id}`);
   }
 }
