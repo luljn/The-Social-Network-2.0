@@ -84,6 +84,22 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl(`/about`);
   }
 
+  onGetSearchResult(){
+
+    const navigationSubscription = this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      // Unsubscribe to prevent multiple triggers
+      navigationSubscription.unsubscribe();
+      // Reload the window after navigation is complete
+      window.location.reload();
+    });
+    this.localstorageService.setItem('searchItem', this.searchForm.value.search.toString());
+    this.searchForm.reset();
+    this.router.navigateByUrl('search');
+    // window.location.reload();
+  }
+
   ngOnDestroy(): void {
 
     if (this.storageSubscription) {

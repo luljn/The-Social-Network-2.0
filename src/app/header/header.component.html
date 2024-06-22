@@ -33,7 +33,7 @@
                 <div class="container-fluid fs-3">
                     <form [formGroup]="searchForm" class="d-flex mt-2 ms-5 me-2">
                       <input class="form-control me-2" type="search" placeholder="Rechercher..." aria-label="Search" formControlName="search">
-                      <button class="btn text-light" type="submit" [disabled]="searchForm.invalid"><i class="bi bi-search" data-bs-toggle="tooltip" title="Recherche"></i></button>
+                      <button class="btn text-light" type="submit" (click)="onGetSearchResult()" [disabled]="searchForm.invalid"><i class="bi bi-search" data-bs-toggle="tooltip" title="Recherche"></i></button>
                     </form>
                 </div>
                 <li *ngIf="user" class="nav-item dropdown mx-2">
