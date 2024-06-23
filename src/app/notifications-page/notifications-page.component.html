@@ -1,20 +1,13 @@
 <section class="mt-5">
     <div class="container mt-5">
-        <div class="row  justify-content-center mt-5">
-            <table class="table table-primary mt-5">
-                <caption align="top" class="text-center text-secondary fs-3 fw-bold mb-3">Vos notifications</caption>
-                <thead>
-                    <tr>
-                        <th scope="col" class="fs-4">#</th>
-                        <th scope="col" class="fs-4">Contenu</th>
-                        <th scope="col" class="fs-4">Date</th>
-                        <th scope="col" class="fs-4">#</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                </tbody>
-            </table>
+        <div *ngIf="notifications$; else elseBlock" class="row justify-content-center mt-5">
+            <h5 class="my-5 text-center fs-1 fw-bold text-secondary">Vos notifications</h5>
+            <app-notification *ngFor="let notification of notifications$ | async" [notification]="notification"></app-notification>
         </div>
+        <ng-template #elseBlock>
+            <div class="row justify-content-center mt-5">
+                <h5 class="my-5 text-center fs-1 fw-bold text-secondary">Aucune notification</h5>
+            </div>
+        </ng-template>
     </div>
 </section>

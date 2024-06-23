@@ -2,6 +2,17 @@
     <div class="container mt-5">
         <div class="row justify-content-center mt-5">
             <h5 class="fs-1 fw-bold text-center text-secondary mt-5">Résultats</h5>
+            <div *ngFor="let user of users$ | async" class="card mt-5 col-12 col-sm-12 ">
+                <div class="my-3 d-flex flex-row">
+                    <a class="text-dark text-decoration-none d-flex flex-row" routerLink="/users/{{user.id}}">
+                        <img [src]="user.profile_photo" class="me-3">
+                        <h5 class="fw-bold">{{ user.prenom + " " + user.nom }}</h5>
+                    </a>
+                </div>
+                <hr class="">
+                <p class="fs-5">{{ user.description }}</p>
+                <hr class="">
+            </div>
         </div>
     </div>
 </section>

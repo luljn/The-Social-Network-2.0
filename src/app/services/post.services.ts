@@ -46,8 +46,7 @@ export class PostServices {
                 sensible: false,
                 nom_utilisateur: this.userService.getConnectedUser()?.nom,
                 prenom_utilisateur: this.userService.getConnectedUser()?.prenom,
-                likes: 0,
-                comments: []
+                likes: 0
             })),
             switchMap(newPost => this.http.post<Post>(`http://localhost:3000/post/`, newPost))
         );
@@ -62,5 +61,16 @@ export class PostServices {
             })),
             switchMap(updatedPost => this.http.put<Post>(`http://localhost:3000/post/${idPost}`, updatedPost))
         );
+    }
+
+    updateNumberOfLikes(numberOflikes: number, idPost: number): void{
+
+        const body = {likes: numberOflikes};
+        this.http.patch(`http://localhost:3000/post/${idPost}`, body).subscribe();
+    }
+
+    deletePost(idPost: number): Observable<void>{
+
+        return this.http.delete<void>(`http://localhost:3000/post/${idPost}`);
     }
 }

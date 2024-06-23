@@ -10,49 +10,33 @@
         <button type="button" class="btn btn-unstyled" (click)="onAddOrRemoveLike(post.id)">
             <i class="bi bi-hand-thumbs-up fs-3 text-primary mx-2" data-bs-toggle="tooltip" title="Like"></i>
         </button><p class="fs-3 me-4 text-secondary">{{ post.likes }}</p>
-        <button type="button" class="btn btn-unstyled" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom">
+        <button type="button" class="btn btn-unstyled" (click)="onViewCommentPage()">
             <i class="bi bi-chat fs-3 text-primary mx-2" data-bs-toggle="tooltip" title="Commenter"></i>
-        </button><p class="fs-3 me-4 text-secondary">{{ post.comments.length }}</p>
+        </button><p class="fs-3 me-4 text-secondary">{{ commentsNumber }}</p>
+        @if(post.id_utilisateur == connectedUser.id || connectedUser.admin == true){
+            <button type="button" class="btn btn-unstyled" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <i class="bi bi-trash3 text-primary fs-3" data-bs-toggle="tooltip" title="Supprimer"></i>
+            </button>
+        }
     </div>
     <button class="btn btn-primary mx-5 my-3" (click)="onViewSinglePost()">Voir plus</button>
 </div>
 
-<!-- Offcanvas to display the comments of a post -->
-<div class="offcanvas offcanvas-bottom h-100" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
-    <div class="offcanvas-header text-center">
-        <h5 class="offcanvas-title fs-3" id="offcanvasBottomLabel"></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body small">
-        <div class="container">
-            <div class="row gx-5">
-                <div class="col-6">
-                    <form class="border p-4 shadow rounded text-bg-light">
-                        <h2 class="text-center mb-4 fs-5"></h2>
-                        <div class="mb-5">
-                          <label for="contenu" class="form-label">Contenu de votre commentaire</label>
-                          <textarea class="form-control" id="contenu" formControlName="contenu" aria-describedby="nouveauPost" cols="50" rows="10">
-                          </textarea>
-                        </div>
-                        <!-- <div class="mb-5">
-                          <label for="image" class="form-label">Voulez-vous ajouter une image ?</label>
-                          <input type="file" class="form-control" id="image" name="image" formControlName="image" accept="image/*">
-                        </div> -->
-                        <button type="submit" class="btn btn-success w-100 fs-5 fw-bold">Enregistrer</button>
-                    </form>
-                </div>
-                <div *ngFor="let commentaire of post.comments" class="col-6">
-                    <div class="card">
-                        <div class="my-3 d-flex flex-row justify-content-between">
-                            <a class="text-dark text-decoration-none" routerLink=``><h5 class="fw-bold">{{ commentaire["prenom_utilisateur"] | titlecase}} {{ commentaire["nom_utilisateur"] | uppercase }}</h5></a>
-                            <h5>{{ commentaire["date_creation"] | date: 'd MMMM yyyy' }}</h5>
-                        </div>
-                        <hr class="">
-                        <p>{{ commentaire["contenu"] }}</p>
-                        <hr class="">
-                    </div>
-                </div>
-            </div>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Supprimer un post.</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            Voulez-vous vraiment supprimer ce post ?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            <button type="button" class="btn btn-primary" (click)="onDeletePost(post.id)">Confirmer</button>
+        </div>
         </div>
     </div>
 </div>
