@@ -86,9 +86,9 @@ export class PostComponent implements OnInit {
     this.router.navigateByUrl(`posts/comments/${this.post.id}`);
   }
 
-  onDeletePost(){
+  onDeletePost(idPost: number){
 
-    this.postService.deletePost(this.post.id).subscribe(
+    this.postService.deletePost(idPost).subscribe(
       () => { window.location.reload(); }
     );
   }

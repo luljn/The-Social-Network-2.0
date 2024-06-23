@@ -18,6 +18,7 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 export class UserFollowingsComponent implements OnInit {
 
   user$!: Observable<User>;
+  connectedUser!: User | null;
 
   constructor(private userService : UserService,
               private route: ActivatedRoute,
@@ -26,6 +27,7 @@ export class UserFollowingsComponent implements OnInit {
 
   ngOnInit(): void {
     
+    this.connectedUser = this.userService.getConnectedUser();
     this.getInformations();
   }
 

@@ -18,7 +18,12 @@
               <div class="mb-3 d-flex flex-row justify-content-between" *ngFor="let follow of user.followings">
                   <img [src]="follow['profile_photo']" width="50" height="50">
                   <a class="text-dark text-decoration-none btn" (click)="onGetFollow(follow['id'])"><h5 class="fs-5 fw-bold">{{ follow['prenom'] + " " + follow['nom'] }}</h5></a>
-                  <button type="button" class="btn btn-primary">UnFollow</button>
+                  @if(connectedUser?.id == user.id){
+                    <button type="button" class="btn btn-primary">UnFollow</button>
+                  }
+                  @else {
+                    <div></div>
+                  }
               </div>
           </div>
                       
