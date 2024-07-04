@@ -2,9 +2,18 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.7.
 
-## Development server
+## Description
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+This is "The Social Network" project built with Angular and JSON Server.
+Find the initial code (in PHP) here : https://github.com/luljn/The-Social-Network.
+
+## Run the project with a Development server
+
+Firstly, get the code of the API used by the application, here : https://github.com/luljn/The-Social-Network-API.
+
+At the root of the API code, run the command : `npm run start`. Navigate to `http://localhost:3000/` to see the informations retrieved by the API in your browser.
+
+Then run `ng serve` at the root of this project for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
